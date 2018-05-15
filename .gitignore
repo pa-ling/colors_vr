@@ -1,0 +1,43 @@
+# =============== #
+# Unity generated #
+# =============== #
+src/Colors_VR/[Tt]emp/
+src/Colors_VR/[Oo]bj/
+src/Colors_VR/[Ll]ibrary/
+src/Colors_VR/sysinfo.txt
+src/Colors_VR/*.stackdump
+src/Colors_VR/Assets/AssetStoreTools*
+src/Colors_VR/*.apk
+src/Colors_VR/*.unitypackage
+ 
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+src/Colors_VR/[Ee]xported[Oo]bj/
+src/Colors_VR/.vs/
+src/Colors_VR/*.userprefs
+src/Colors_VR/*.csproj
+src/Colors_VR/*.pidb
+src/Colors_VR/*.pidb.meta
+src/Colors_VR/*.suo
+src/Colors_VR/*.sln*
+src/Colors_VR/*.user
+src/Colors_VR/*.unityproj
+src/Colors_VR/*.booproj
+src/Colors_VR/.consulo/
+src/Colors_VR/*.tmp
+src/Colors_VR/*.svd
+ 
+# ============ #
+# OS generated #
+# ============ #
+src/Colors_VR/.DS_Store*
+src/Colors_VR/._*
+src/Colors_VR/.Spotlight-V100
+src/Colors_VR/.Trashes
+src/Colors_VR/Icon?
+src/Colors_VR/ehthumbs.db
+src/Colors_VR/[Tt]humbs.db
+src/Colors_VR/[Dd]esktop.ini
+src/Colors_VR/Corridor/Library/ShaderCache/
+src/Colors_VR/Corridor/Library/metadata/
