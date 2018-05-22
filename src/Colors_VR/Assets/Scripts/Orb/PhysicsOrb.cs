@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 
-public class PhysicsOrb : MonoBehaviour
+public class PhysicsOrb : Orb
 {
-	private void OnCollisionEnter(Collision collision)
+	protected override void OnCollisionEnter(Collision collision)
 	{
+		base.OnCollisionEnter(collision);
+
 		Debug.Log("PhysicsOrb hit");
+
+		Destroy(gameObject);
 	}
 }

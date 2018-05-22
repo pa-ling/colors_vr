@@ -24,7 +24,8 @@ GameObject:
   - component: {fileID: 23435494347105082}
   - component: {fileID: 54018897157058546}
   - component: {fileID: 114310190638856676}
-  m_Layer: 0
+  - component: {fileID: 114876739096202510}
+  m_Layer: 8
   m_Name: PhysicsOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,6 +110,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd2b2608bb01dbf429dea681a8b17cf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  splatMinSize: 0.5
+  splatMaxSize: 1.5
+--- !u!114 &114876739096202510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1326699483556308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e8beac5634cb304092dca6b6d080994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967039
+  skinWidth: 0.1
 --- !u!135 &135829749559811224
 SphereCollider:
   m_ObjectHideFlags: 1

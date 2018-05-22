@@ -7,14 +7,14 @@ public class OrbGun : MonoBehaviour
 	public GameObject physicsOrb = null;
 	public GameObject teleportOrb = null;
 
-	private Orb currentOrb = Orb.PaintOrb;
+	private OrbType currentOrb = OrbType.PaintOrb;
 
-	public Orb GetCurrentOrb()
+	public OrbType GetCurrentOrb()
 	{
 		return currentOrb;
 	}
 
-	public void SetCurrentOrbTo(Orb orbType)
+	public void SetCurrentOrbTo(OrbType orbType)
 	{
 		currentOrb = orbType;
 	}
@@ -24,22 +24,22 @@ public class OrbGun : MonoBehaviour
 		GameObject orbPrefab = null;
 		float orbSpeed = 0.0f;
 
-		if (currentOrb == Orb.FluidOrb)
+		if (currentOrb == OrbType.FluidOrb)
 		{
 			orbPrefab = fluidOrb;
 			orbSpeed = 500.0f;
 		}
-		else if (currentOrb == Orb.PaintOrb)
+		else if (currentOrb == OrbType.PaintOrb)
 		{
 			orbPrefab = paintOrb;
 			orbSpeed = 500.0f;
 		}
-		else if (currentOrb == Orb.PhysicsOrb)
+		else if (currentOrb == OrbType.PhysicsOrb)
 		{
 			orbPrefab = physicsOrb;
 			orbSpeed = 500.0f;
 		}
-		else if (currentOrb == Orb.TeleportOrb)
+		else if (currentOrb == OrbType.TeleportOrb)
 		{
 			orbPrefab = teleportOrb;
 			orbSpeed = 500.0f;

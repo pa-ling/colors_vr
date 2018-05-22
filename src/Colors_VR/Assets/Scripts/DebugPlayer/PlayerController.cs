@@ -37,10 +37,10 @@ public class PlayerController : MonoBehaviour
 
 	private void ChangeOrbType()
 	{
-		Orb orb = orbGun.GetCurrentOrb();
+		OrbType orb = orbGun.GetCurrentOrb();
 
-		if (orb == Orb.TeleportOrb)
-			orb = Orb.FluidOrb;
+		if (orb == OrbType.TeleportOrb)
+			orb = OrbType.FluidOrb;
 		else
 			++orb;
 

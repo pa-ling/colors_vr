@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 
-public class TeleportOrb : MonoBehaviour
+public class TeleportOrb : Orb
 {
-	private void OnCollisionEnter(Collision collision)
+	protected override void OnCollisionEnter(Collision collision)
 	{
+		base.OnCollisionEnter(collision);
+
 		Debug.Log("TeleportOrb hit");
+
+		Destroy(gameObject);
 	}
 }

@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 
-public class FluidOrb : MonoBehaviour
+public class FluidOrb : Orb
 {
-	private void OnCollisionEnter(Collision collision)
+	protected override void OnCollisionEnter(Collision collision)
 	{
+		base.OnCollisionEnter(collision);
+
 		Debug.Log("FluidOrb hit");
+
+		Destroy(gameObject);
 	}
 }

@@ -24,7 +24,8 @@ GameObject:
   - component: {fileID: 23335404418564740}
   - component: {fileID: 54493002491426452}
   - component: {fileID: 114480312245961284}
-  m_Layer: 0
+  - component: {fileID: 114513894876472434}
+  m_Layer: 8
   m_Name: PaintOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,6 +110,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7bd27ba1f89e84a81a2ac74364f95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  splatMinSize: 0.5
+  splatMaxSize: 1.5
+--- !u!114 &114513894876472434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1341749121274510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e8beac5634cb304092dca6b6d080994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967039
+  skinWidth: 0.1
 --- !u!135 &135594842459267132
 SphereCollider:
   m_ObjectHideFlags: 1
