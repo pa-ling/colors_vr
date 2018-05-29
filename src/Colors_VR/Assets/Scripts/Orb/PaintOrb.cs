@@ -6,8 +6,6 @@ public class PaintOrb : Orb
 	{
 		base.OnCollisionEnter(collision);
 
-		Debug.Log("PaintOrb hit");
-
 		Destroy(gameObject);
 	}
 }

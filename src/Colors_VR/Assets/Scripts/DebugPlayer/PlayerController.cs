@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
 	{
 		orbGun = GetComponentInChildren<OrbGun>();
 
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
+
 		infoText.text = orbGun.GetCurrentOrb().ToString();
 	}
 
@@ -40,7 +43,7 @@ public class PlayerController : MonoBehaviour
 		OrbType orb = orbGun.GetCurrentOrb();
 
 		if (orb == OrbType.TeleportOrb)
-			orb = OrbType.FluidOrb;
+			orb = OrbType.CommandOrb;
 		else
 			++orb;
 

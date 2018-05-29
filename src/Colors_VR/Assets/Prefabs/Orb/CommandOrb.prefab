@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114906930217611294}
   - component: {fileID: 114428872945908124}
   m_Layer: 8
-  m_Name: FluidOrb
+  m_Name: CommandOrb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,9 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e8beac5634cb304092dca6b6d080994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
+  collidingLayer:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 4294966527
   skinWidth: 0.1
 --- !u!114 &114906930217611294
 MonoBehaviour:
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   splatMinSize: 0.5
   splatMaxSize: 1.5
+  speed: 750
 --- !u!135 &135230778456580698
 SphereCollider:
   m_ObjectHideFlags: 1

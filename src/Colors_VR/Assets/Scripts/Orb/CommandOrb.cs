@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class FluidOrb : Orb
+public class CommandOrb : Orb
 {
 	protected override void OnCollisionEnter(Collision collision)
 	{
 		base.OnCollisionEnter(collision);
 
-		Debug.Log("FluidOrb hit");
+		Debug.Log("Command hit");
 
 		Destroy(gameObject);
 	}

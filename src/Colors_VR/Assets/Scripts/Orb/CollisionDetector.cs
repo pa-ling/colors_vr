@@ -2,7 +2,7 @@
 
 public class CollisionDetector : MonoBehaviour
 {
-	public LayerMask layerMask = -1;
+	public LayerMask collidingLayer = -1;
 	[Range(0.0f, 1.0f)]
 	public float skinWidth = 0.1f;
 
@@ -31,9 +31,8 @@ public class CollisionDetector : MonoBehaviour
 		{
 			RaycastHit raycastHit;
 
-			if (Physics.Raycast(lastPosition, movement, out raycastHit, movement.magnitude, layerMask))
+			if (Physics.Raycast(lastPosition, movement, out raycastHit, movement.magnitude, collidingLayer))
 			{
-				Debug.Log("FixedUpdate");
 				if (!raycastHit.collider)
 					return;
 

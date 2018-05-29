@@ -6,13 +6,16 @@ public class Orb : MonoBehaviour
 {
 	public float splatMinSize = 0.5f;
 	public float splatMaxSize = 1.5f;
+	public float speed = 500.0f;
 
-	private MeshRenderer meshRenderer;
+	protected MeshRenderer meshRenderer;
 	private SplatParticleSystem splatParticleSystem = null;
+	public ParticleSystem dropletParticleSystem = null;
 
 	protected void Start()
 	{
 		splatParticleSystem = GameObject.Find("SplatParticleSystem").GetComponent<SplatParticleSystem>();
+		dropletParticleSystem = GameObject.Find("DropletParticleSystem").GetComponent<ParticleSystem>();
 		meshRenderer = GetComponent<MeshRenderer>();
 	}
 
@@ -27,5 +30,13 @@ public class Orb : MonoBehaviour
 		splatParticle.color = meshRenderer.material.color;
 
 		splatParticleSystem.AddSplatParticle(splatParticle);
+
+		dropletParticleSystem.gameObject.transform.position = collision.contacts[0].point;
+		dropletParticleSystem.gameObject.transform.rotation = Quaternion.LookRotation(collision.contacts[0].normal);
+		ParticleSystem.ShapeModule shapeModule = dropletParticleSystem.shape;
+		shapeModule.radius = 0.25f * splatParticle.size;
+		ParticleSystem.MainModule mainModule = dropletParticleSystem.main;
+		mainModule.startColor = meshRenderer.material.color;
+		dropletParticleSystem.Emit(Random.Range(3, 6));
 	}
 }

@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   splatMinSize: 0.5
   splatMaxSize: 1.5
+  speed: 5000
 --- !u!114 &114876739096202510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -123,9 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e8beac5634cb304092dca6b6d080994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
+  collidingLayer:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 4294966527
   skinWidth: 0.1
 --- !u!135 &135829749559811224
 SphereCollider:
