@@ -18,8 +18,8 @@ TagManager:
   - Orb
   - Player
   - Teleportable
-  - 
-  - 
+  - DontSplatOn
+  - Companion
   - 
   - 
   - 

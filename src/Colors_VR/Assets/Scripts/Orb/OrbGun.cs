@@ -2,7 +2,8 @@
 
 public class OrbGun : MonoBehaviour
 {
-	public LayerMask ignoreLayer;
+	public LayerMask dontCollidWith;
+	public LayerMask dontLeaveSplatsOn;
 	public Transform playerRoor;
 	public ParticleSystem dropletParticleSystem;
 	public GameObject commandOrb = null;
@@ -19,7 +20,7 @@ public class OrbGun : MonoBehaviour
 	private void Start()
 	{
 		int orbLayer = LayerMask.NameToLayer("Orb");
-		uint bitstring = (uint)ignoreLayer.value;
+		uint bitstring = (uint)dontCollidWith.value;
 		for (int i = 31; bitstring > i; --i)
 		{
 			if ((bitstring >> i) > 0)
@@ -34,14 +35,15 @@ public class OrbGun : MonoBehaviour
 		physicsOrbComponent = physicsOrb.GetComponent<PhysicsOrb>();
 		teleportOrbComponent = teleportOrb.GetComponent<TeleportOrb>();
 
-		commandOrb.GetComponent<CollisionDetector>().collidingLayer = ~ignoreLayer;
-		paintOrb.GetComponent<CollisionDetector>().collidingLayer = ~ignoreLayer;
-		physicsOrb.GetComponent<CollisionDetector>().collidingLayer = ~ignoreLayer;
-		teleportOrb.GetComponent<CollisionDetector>().collidingLayer = ~ignoreLayer;
+		commandOrb.GetComponent<CollisionDetector>().collidingLayer = ~dontCollidWith;
+		paintOrb.GetComponent<CollisionDetector>().collidingLayer = ~dontCollidWith;
+		physicsOrb.GetComponent<CollisionDetector>().collidingLayer = ~dontCollidWith;
+		teleportOrb.GetComponent<CollisionDetector>().collidingLayer = ~dontCollidWith;
 
-		teleportOrbComponent.playerTransform = playerRoor;
-		teleportOrbComponent.playerTransform = playerRoor;
-		teleportOrbComponent.playerTransform = playerRoor;
+		commandOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;
+		paintOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;
+		physicsOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;
+		teleportOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;
 		teleportOrbComponent.playerTransform = playerRoor;
 	}
 

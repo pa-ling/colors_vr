@@ -8,6 +8,8 @@ public class Orb : MonoBehaviour
 	public float splatMaxSize = 1.5f;
 	public float speed = 500.0f;
 
+	public LayerMask dontLeaveSplatsOn;
+
 	protected MeshRenderer meshRenderer;
 	private SplatParticleSystem splatParticleSystem = null;
 	public ParticleSystem dropletParticleSystem = null;
@@ -20,6 +22,14 @@ public class Orb : MonoBehaviour
 	}
 
 	protected virtual void OnCollisionEnter(Collision collision)
+	{
+		if ((dontLeaveSplatsOn & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)
+			return;
+
+		Splat(collision);
+	}
+
+	private void Splat(Collision collision)
 	{
 		SplatParticle splatParticle = new SplatParticle();
 		splatParticle.position = collision.contacts[0].point;
