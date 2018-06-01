@@ -9,18 +9,6 @@ public class Door : MonoBehaviour
 		animator = GetComponent<Animator>();
 	}
 
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			OpenDoor();
-		}
-		else if (Input.GetKeyDown(KeyCode.M))
-		{
-			CloseDoor();
-		}
-	}
-
 	public void OpenDoor()
 	{
 		animator.SetBool("Open", true);

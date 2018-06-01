@@ -8,11 +8,13 @@ public class Orb : MonoBehaviour
 	public float splatMaxSize = 1.5f;
 	public float speed = 500.0f;
 
+	[HideInInspector]
 	public LayerMask dontLeaveSplatsOn;
+	[HideInInspector]
+	public ParticleSystem dropletParticleSystem = null;
 
 	protected MeshRenderer meshRenderer;
 	private SplatParticleSystem splatParticleSystem = null;
-	public ParticleSystem dropletParticleSystem = null;
 
 	protected void Start()
 	{

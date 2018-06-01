@@ -8147,12 +8147,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 6144
   playerRoor: {fileID: 1053729578}
-  dropletParticleSystem: {fileID: 0}
   commandOrb: {fileID: 1042646391236942, guid: b9b78b7c550f4f64198e39c88243e028, type: 2}
   paintOrb: {fileID: 1341749121274510, guid: 77ae4db325f34654eba766d7216c2479, type: 2}
   physicsOrb: {fileID: 1326699483556308, guid: 9a324019ed2f17144a546b4ce175b035, type: 2}
   teleportOrb: {fileID: 1165327940688582, guid: ae2dad3dd13f29b4d9777c0450d836c7,
     type: 2}
+  companion: {fileID: 0}
 --- !u!1 &717316410
 GameObject:
   m_ObjectHideFlags: 0
@@ -8600,12 +8600,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 6144
   playerRoor: {fileID: 1220247491}
-  dropletParticleSystem: {fileID: 0}
   commandOrb: {fileID: 1042646391236942, guid: b9b78b7c550f4f64198e39c88243e028, type: 2}
   paintOrb: {fileID: 1341749121274510, guid: 77ae4db325f34654eba766d7216c2479, type: 2}
   physicsOrb: {fileID: 1326699483556308, guid: 9a324019ed2f17144a546b4ce175b035, type: 2}
   teleportOrb: {fileID: 1165327940688582, guid: ae2dad3dd13f29b4d9777c0450d836c7,
     type: 2}
+  companion: {fileID: 1921987347}
 --- !u!1 &1032823665
 GameObject:
   m_ObjectHideFlags: 0

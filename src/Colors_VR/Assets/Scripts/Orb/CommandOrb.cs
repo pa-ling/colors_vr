@@ -2,11 +2,14 @@
 
 public class CommandOrb : Orb
 {
+	[HideInInspector]
+	public Companion companion;
+
 	protected override void OnCollisionEnter(Collision collision)
 	{
 		base.OnCollisionEnter(collision);
 
-		Debug.Log("Command hit");
+		companion.MoveTo(collision.contacts[0].point);
 
 		Destroy(gameObject);
 	}

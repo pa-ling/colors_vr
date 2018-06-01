@@ -5,11 +5,11 @@ public class OrbGun : MonoBehaviour
 	public LayerMask dontCollidWith;
 	public LayerMask dontLeaveSplatsOn;
 	public Transform playerRoor;
-	public ParticleSystem dropletParticleSystem;
 	public GameObject commandOrb = null;
 	public GameObject paintOrb = null;
 	public GameObject physicsOrb = null;
 	public GameObject teleportOrb = null;
+	public Companion companion;
 
 	private OrbType currentOrb = OrbType.PaintOrb;
 	private CommandOrb commandOrbComponent;
@@ -41,6 +41,7 @@ public class OrbGun : MonoBehaviour
 		teleportOrb.GetComponent<CollisionDetector>().collidingLayer = ~dontCollidWith;
 
 		commandOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;
+		commandOrbComponent.companion = companion;
 		paintOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;
 		physicsOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;
 		teleportOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;

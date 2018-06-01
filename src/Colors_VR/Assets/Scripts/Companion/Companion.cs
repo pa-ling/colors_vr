@@ -10,8 +10,6 @@ public class Companion : MonoBehaviour
 	{
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		animator = GetComponent<Animator>();
-
-		MoveTo(new Vector3(-5.0f, 0.0f, 15.0f));
 	}
 
 	private void Update()
