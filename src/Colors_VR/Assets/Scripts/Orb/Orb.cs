@@ -18,8 +18,8 @@ public class Orb : MonoBehaviour
 
 	protected void Start()
 	{
-		splatParticleSystem = GameObject.Find("SplatParticleSystem").GetComponent<SplatParticleSystem>();
-		dropletParticleSystem = GameObject.Find("DropletParticleSystem").GetComponent<ParticleSystem>();
+		//splatParticleSystem = GameObject.Find("SplatParticleSystem").GetComponent<SplatParticleSystem>();
+		//dropletParticleSystem = GameObject.Find("DropletParticleSystem").GetComponent<ParticleSystem>();
 		meshRenderer = GetComponent<MeshRenderer>();
 	}
 
@@ -28,7 +28,7 @@ public class Orb : MonoBehaviour
 		if ((dontLeaveSplatsOn & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)
 			return;
 
-		Splat(collision);
+		Splat2(collision);
 	}
 
 	private void Splat(Collision collision)
@@ -51,4 +51,9 @@ public class Orb : MonoBehaviour
 		mainModule.startColor = meshRenderer.material.color;
 		dropletParticleSystem.Emit(Random.Range(3, 6));
 	}
+
+    private void Splat2(Collision collision)
+    {
+        collision.collider.GetComponent<Paintable>().ApplyPaint(collision.contacts[0].point, 0.5f, 1.0f, Color.cyan);
+    }
 }
