@@ -18,6 +18,8 @@ public class ColorPuzzle : MonoBehaviour {
         }
     }
 
+
+
     public void changeColor(Color color)
     {
         bool changeColor = true;
@@ -38,10 +40,15 @@ public class ColorPuzzle : MonoBehaviour {
             {
                 if (neighbourRender.material.color == color)
                 {
-                    neighbourRender.material.color = Color.white;
                     foreach (Renderer render in ownRend)
                     {
-                        render.material.color = Color.white;                  //fade to white, not instant...
+                        render.material.color = color;
+                    }
+
+                    StartCoroutine(fade(neighbourRender.material, neighbourRender.material.color, Color.white, 2));
+                    foreach (Renderer render in ownRend)
+                    {
+                        StartCoroutine(fade(render.material, render.material.color, Color.white, 2));
                     }
                     changeColor = false;
                 }
@@ -65,6 +72,17 @@ public class ColorPuzzle : MonoBehaviour {
         {
             changeColor(collision.gameObject.GetComponent<Renderer>().material.color);
             Destroy(collision.gameObject);
+        }
+    }
+
+    private IEnumerator fade(Material material, Color colorFrom, Color colorTo, float timer)
+    {
+        float t = 0.0f;
+        while (t < 1.0)
+        {
+            t += Time.deltaTime * (1.0f / timer);
+            material.color = Color.Lerp(colorFrom, colorTo, t);
+            yield return null;
         }
     }
 }
