@@ -12,10 +12,12 @@ public class Paintable : MonoBehaviour {
         mesh = GetComponent<MeshFilter>().mesh;
         verts = mesh.vertices;
         vertColors = new Color32[verts.Length];
+        Color32 whiteWithZeroAlpha = new Color32(255, 255, 255, 0);
         for (int i = 0; i < verts.Length; i++)
         {
-            vertColors[i] = Color.white; //TODO: get default color from gameObject?
+            vertColors[i] = whiteWithZeroAlpha;
         }
+        mesh.colors32 = vertColors;
     }
 
     public void ApplyPaint(Vector3 position, float innerRadius, float outerRadius, Color color)
@@ -50,6 +52,7 @@ public class Paintable : MonoBehaviour {
                     vertColors[i].a = blobA;
                 }
             }
+            Debug.Log(vertColors[i]);
         }
         mesh.colors32 = vertColors;
     }

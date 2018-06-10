@@ -66,7 +66,7 @@ public class Orb : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Paintable>() != null)
         {
-            collision.collider.GetComponent<Paintable>().ApplyPaint(collision.contacts[0].point, 0.5f, 1.0f, Color.black);
+            collision.collider.GetComponent<Paintable>().ApplyPaint(collision.contacts[0].point, 0.1f, 0.5f, Color.black);
         }
     }
 }
