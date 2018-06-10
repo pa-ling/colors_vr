@@ -113,6 +113,11 @@ MonoBehaviour:
   splatMinSize: 0.5
   splatMaxSize: 1.5
   speed: 1000
+  dontLeaveSplatsOn:
+    serializedVersion: 2
+    m_Bits: 6144
+  dropletParticleSystem: {fileID: 0}
+  usePaintOnVertices: 0
 --- !u!114 &114513894876472434
 MonoBehaviour:
   m_ObjectHideFlags: 1

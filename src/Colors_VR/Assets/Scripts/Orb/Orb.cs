@@ -13,6 +13,8 @@ public class Orb : MonoBehaviour
 	[HideInInspector]
 	public ParticleSystem dropletParticleSystem = null;
 
+    public bool usePaintOnVertices = false;
+
 	protected MeshRenderer meshRenderer;
 	private SplatParticleSystem splatParticleSystem = null;
 
@@ -28,7 +30,15 @@ public class Orb : MonoBehaviour
 		if ((dontLeaveSplatsOn & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)
 			return;
 
-		Splat(collision);
+        if (usePaintOnVertices)
+        {
+            SplatOnVertices(collision);
+        } else
+        {
+            Splat(collision);
+        }
+
+
 	}
 
 	private void Splat(Collision collision)
@@ -51,4 +61,12 @@ public class Orb : MonoBehaviour
 		mainModule.startColor = meshRenderer.material.color;
 		dropletParticleSystem.Emit(Random.Range(3, 6));
 	}
+
+    private void SplatOnVertices (Collision collision)
+    {
+        if (collision.gameObject.GetComponent<Paintable>() != null)
+        {
+            collision.collider.GetComponent<Paintable>().ApplyPaint(collision.contacts[0].point, 0.5f, 1.0f, Color.black);
+        }
+    }
 }
