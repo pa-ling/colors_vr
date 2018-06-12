@@ -5,6 +5,7 @@ public class Companion : MonoBehaviour
 {
 	private NavMeshAgent navMeshAgent;
 	private Animator animator;
+	private bool ignoreCommands = false;
 
 	private void Start()
 	{
@@ -19,8 +20,40 @@ public class Companion : MonoBehaviour
 		animator.SetFloat("Forward", (forward > 0) ? forward : 1.0f);
 	}
 
+	private void OnTriggerEnter(Collider other)
+	{
+		Lift lift = other.gameObject.GetComponent<Lift>();
+		if (lift != null)
+		{
+			if (transform.parent == null)
+				transform.SetParent(other.gameObject.transform);
+			lift.CompanionEntersLift();
+		}
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		Lift lift = other.gameObject.GetComponent<Lift>();
+		if (lift != null)
+		{
+			transform.SetParent(null);
+			lift.CompanionLeftLift();
+		}
+	}
+
 	public void MoveTo(Vector3 position)
 	{
-		navMeshAgent.destination = position;
+		if (!ignoreCommands)
+			navMeshAgent.destination = position;
+	}
+
+	public void IgnoreCommand(bool state)
+	{
+		ignoreCommands = state;
+	}
+
+	public void SetNavMeshAgentActive(bool state)
+	{
+		navMeshAgent.enabled = state;
 	}
 }

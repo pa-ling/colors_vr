@@ -20,6 +20,9 @@ public class TeleportOrb : Orb
 			}
 		}
 
+		if (collision.contacts[0].normal != collision.gameObject.transform.up)
+			return;
+
 		base.OnCollisionEnter(collision);
 
 		StartCoroutine(Teleport(new Vector3(collision.contacts[0].point.x, collision.contacts[0].point.y, collision.contacts[0].point.z), 0.2f));
