@@ -8,6 +8,8 @@ public class Orb : MonoBehaviour
 	public float splatMaxSize = 1.5f;
 	public float speed = 500.0f;
 
+    public AudioClip splashSound;
+
 	[HideInInspector]
 	public LayerMask dontLeaveSplatsOn;
 	[HideInInspector]

@@ -28,6 +28,7 @@ public class TeleportOrb : Orb
         if (!stopCollision)
         {
             StartCoroutine(Teleport(new Vector3(collision.contacts[0].point.x, collision.contacts[0].point.y, collision.contacts[0].point.z), 0.2f));
+            AudioSource.PlayClipAtPoint(splashSound, transform.position);
         }
         else
         {

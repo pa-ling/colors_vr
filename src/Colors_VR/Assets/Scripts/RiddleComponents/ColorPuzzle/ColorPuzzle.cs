@@ -7,6 +7,8 @@ public class ColorPuzzle : MonoBehaviour {
     private Renderer[] ownRend;
     public List<GameObject> neighbours;
 
+    public AudioClip audioClip;
+
 	void Start () {
         if(GetComponent<Renderer>() == null)
         {
@@ -17,8 +19,6 @@ public class ColorPuzzle : MonoBehaviour {
             ownRend = new Renderer[] { GetComponent<Renderer>() };
         }
     }
-
-
 
     public void changeColor(Color color)
     {
@@ -71,6 +71,7 @@ public class ColorPuzzle : MonoBehaviour {
         if (!transform.parent.GetComponent<ColorPuzzleBase>().getIfSolutionIsCorrect())
         {
             changeColor(collision.gameObject.GetComponent<Renderer>().material.color);
+            AudioSource.PlayClipAtPoint(audioClip, transform.position);
             Destroy(collision.gameObject);
         }
     }

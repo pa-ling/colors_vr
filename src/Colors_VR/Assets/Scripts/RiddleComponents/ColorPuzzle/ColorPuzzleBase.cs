@@ -9,6 +9,16 @@ public class ColorPuzzleBase : MonoBehaviour {
     public Door door;
 	public NavMeshLink navMeshLink;
 
+    public AudioClip audioClip;
+
+    public void Awake()
+    {
+        foreach (Transform child in transform)
+        {
+            child.GetComponent<ColorPuzzle>().audioClip = audioClip;
+        }
+    }
+
     public void checkSolution()
     {
         Renderer[] rend;

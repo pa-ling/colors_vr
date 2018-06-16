@@ -2,12 +2,15 @@
 
 public class PhysicsOrb : Orb
 {
-	protected override void OnCollisionEnter(Collision collision)
+    protected override void OnCollisionEnter(Collision collision)
 	{
 		base.OnCollisionEnter(collision);
 
-		Debug.Log("PhysicsOrb hit");
+        if (!stopCollision)
+        {
+            AudioSource.PlayClipAtPoint(splashSound, transform.position);
+        }
 
-		Destroy(gameObject);
+        Destroy(gameObject);
 	}
 }
