@@ -9,7 +9,10 @@ public class CommandOrb : Orb
 	{
 		base.OnCollisionEnter(collision);
 
-		companion.MoveTo(collision.contacts[0].point);
+        if (!stopCollision)
+        {
+            companion.MoveTo(collision.contacts[0].point);
+        }
 
 		Destroy(gameObject);
 	}

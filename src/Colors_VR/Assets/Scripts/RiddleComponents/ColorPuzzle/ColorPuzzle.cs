@@ -71,7 +71,7 @@ public class ColorPuzzle : MonoBehaviour {
         if (!transform.parent.GetComponent<ColorPuzzleBase>().getIfSolutionIsCorrect())
         {
             changeColor(collision.gameObject.GetComponent<Renderer>().material.color);
-            Destroy(collision.gameObject, 0.5f);
+            Destroy(collision.gameObject);
         }
     }
 

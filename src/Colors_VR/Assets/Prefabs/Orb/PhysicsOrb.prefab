@@ -98,7 +98,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &114310190638856676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,6 +113,11 @@ MonoBehaviour:
   splatMinSize: 0.5
   splatMaxSize: 1.5
   speed: 5000
+  dontLeaveSplatsOn:
+    serializedVersion: 2
+    m_Bits: 6144
+  dropletParticleSystem: {fileID: 0}
+  stopCollision: 0
 --- !u!114 &114876739096202510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collidingLayer:
     serializedVersion: 2
-    m_Bits: 4294966527
+    m_Bits: 4294958335
   skinWidth: 0.1
 --- !u!135 &135829749559811224
 SphereCollider:
