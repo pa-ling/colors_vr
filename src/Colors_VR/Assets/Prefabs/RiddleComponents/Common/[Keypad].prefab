@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4046136015281092}
   - component: {fileID: 114007654472421788}
+  - component: {fileID: 82150836561702646}
   m_Layer: 0
   m_Name: '[Keypad]'
   m_TagString: Untagged
@@ -39,7 +40,7 @@ GameObject:
   - component: {fileID: 65964240870344158}
   - component: {fileID: 23562682925547414}
   - component: {fileID: 114607971793735738}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Key 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +57,7 @@ GameObject:
   - component: {fileID: 4321272255347250}
   - component: {fileID: 23882990335627736}
   - component: {fileID: 102073453675301460}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Caption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +74,7 @@ GameObject:
   - component: {fileID: 4889388034318270}
   - component: {fileID: 23970273526661374}
   - component: {fileID: 102476820243709572}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Caption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +93,7 @@ GameObject:
   - component: {fileID: 65165506678326552}
   - component: {fileID: 23194337479054056}
   - component: {fileID: 114199167188513586}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Key 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +112,7 @@ GameObject:
   - component: {fileID: 65237272340585350}
   - component: {fileID: 23523231866373030}
   - component: {fileID: 114867547652116438}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Key 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +149,7 @@ GameObject:
   - component: {fileID: 65884866782091962}
   - component: {fileID: 23223975574446100}
   - component: {fileID: 114721530132423202}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Key 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +166,7 @@ GameObject:
   - component: {fileID: 4404674030015560}
   - component: {fileID: 23509725464518486}
   - component: {fileID: 102254969751658252}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Caption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +185,7 @@ GameObject:
   - component: {fileID: 65164148786876222}
   - component: {fileID: 23979433288160432}
   - component: {fileID: 114932037072728638}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Key 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +204,7 @@ GameObject:
   - component: {fileID: 65435439823225066}
   - component: {fileID: 23798355079587454}
   - component: {fileID: 114931094844446724}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Key 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +224,7 @@ GameObject:
   - component: {fileID: 23480592876921104}
   - component: {fileID: 114754822609252510}
   - component: {fileID: 114331188172993954}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Key 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +241,7 @@ GameObject:
   - component: {fileID: 4042058984683716}
   - component: {fileID: 23894296205156846}
   - component: {fileID: 102524518329640782}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Caption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +260,7 @@ GameObject:
   - component: {fileID: 65365449426869226}
   - component: {fileID: 23262152435897924}
   - component: {fileID: 114493009220265532}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Key 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +277,7 @@ GameObject:
   - component: {fileID: 4836213429537232}
   - component: {fileID: 23963210078327180}
   - component: {fileID: 102503526396414158}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Caption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +296,7 @@ GameObject:
   - component: {fileID: 65966379630783918}
   - component: {fileID: 23514484630609692}
   - component: {fileID: 114113834249032530}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Key 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -312,7 +313,7 @@ GameObject:
   - component: {fileID: 4371597344420404}
   - component: {fileID: 23630236696836956}
   - component: {fileID: 102391113660893978}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Caption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +330,7 @@ GameObject:
   - component: {fileID: 4482312098154682}
   - component: {fileID: 23922098112164544}
   - component: {fileID: 102114049478577260}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Caption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +349,7 @@ GameObject:
   - component: {fileID: 65040201692792194}
   - component: {fileID: 23599223248087670}
   - component: {fileID: 114731152528579968}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Key 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +366,7 @@ GameObject:
   - component: {fileID: 4747413330646926}
   - component: {fileID: 23248893811946510}
   - component: {fileID: 102318873166807162}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Caption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +383,7 @@ GameObject:
   - component: {fileID: 4280458261245260}
   - component: {fileID: 23873656075715084}
   - component: {fileID: 102624529029951680}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Caption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,7 +398,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4996105415744888}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: '[Keys]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +415,7 @@ GameObject:
   - component: {fileID: 4598673506781744}
   - component: {fileID: 23002499306391240}
   - component: {fileID: 102158946886834480}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Caption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,15 +454,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1029433818924376}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 10, y: 3, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4012674593144330}
   - {fileID: 4996105415744888}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!4 &4052255273844922
 Transform:
   m_ObjectHideFlags: 1
@@ -1623,6 +1624,86 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &82150836561702646
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1029433818924376}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 7f9c87925441e43bdbb6399f1c1793a6, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!102 &102073453675301460
 TextMesh:
   serializedVersion: 3
