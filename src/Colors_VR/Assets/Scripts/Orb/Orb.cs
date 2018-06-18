@@ -7,6 +7,7 @@ public class Orb : MonoBehaviour
 	public float splatMinSize = 0.5f;
 	public float splatMaxSize = 1.5f;
 	public float speed = 500.0f;
+    public int colorChannel = 3;
 
     public AudioClip splashSound;
 
@@ -65,6 +66,6 @@ public class Orb : MonoBehaviour
 
     private void SplatOnVertices (Collision collision)
     {
-		collision.collider.GetComponent<Paintable>().ApplyPaint(collision.contacts[0].point, 0.1f, 0.5f, meshRenderer.material.color);
+        collision.collider.GetComponent<Paintable>().ApplyPaint(collision.contacts[0].point, 0.05f, 0.3f, colorChannel);
     }
 }
