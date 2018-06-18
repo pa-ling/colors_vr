@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   splatMinSize: 0.5
   splatMaxSize: 1.5
-  speed: 500
+  speed: 1000
   colorChannel: 2
   splashSound: {fileID: 8300000, guid: a2671158580359a4c859397b56acb171, type: 3}
   dontLeaveSplatsOn:

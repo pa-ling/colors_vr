@@ -7,6 +7,9 @@ public class ColorPuzzle : MonoBehaviour {
     private Renderer[] ownRend;
     public List<GameObject> neighbours;
 
+    [HideInInspector]
+    public bool finished = false;
+
     public AudioClip audioClip;
 
 	void Start () {
@@ -40,6 +43,8 @@ public class ColorPuzzle : MonoBehaviour {
             {
                 if (neighbourRender.material.color == color)
                 {
+                    finished = false;
+                    go.GetComponent<ColorPuzzle>().finished = false;
                     foreach (Renderer render in ownRend)
                     {
                         render.material.color = color;
@@ -57,6 +62,7 @@ public class ColorPuzzle : MonoBehaviour {
 
         if (changeColor)
         {
+            finished = true;
             foreach(Renderer render in ownRend)
             {
                 render.material.color = color;

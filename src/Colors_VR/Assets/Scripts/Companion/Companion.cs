@@ -7,10 +7,13 @@ public class Companion : MonoBehaviour
 	private Animator animator;
 	private bool ignoreCommands = false;
 
+    private AudioSource audioSource;
+
 	private void Start()
 	{
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 	}
 
 	private void Update()
@@ -18,6 +21,20 @@ public class Companion : MonoBehaviour
 		float forward = Vector3.Dot(navMeshAgent.velocity, transform.forward) / navMeshAgent.velocity.magnitude;
 		animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
 		animator.SetFloat("Forward", (forward > 0) ? forward : 1.0f);
+
+        if(navMeshAgent.velocity != Vector3.zero)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            audioSource.Pause();
+        }
+
+
 	}
 
 	private void OnTriggerEnter(Collider other)

@@ -17,6 +17,8 @@ public class OrbGun : MonoBehaviour
 	private PhysicsOrb physicsOrbComponent;
 	private TeleportOrb teleportOrbComponent;
 
+    private AudioSource audioSource;
+
 	private void Start()
 	{
 		int orbLayer = LayerMask.NameToLayer("Orb");
@@ -46,6 +48,8 @@ public class OrbGun : MonoBehaviour
 		physicsOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;
 		teleportOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;
 		teleportOrbComponent.playerTransform = playerRoor;
+
+        audioSource = GetComponent<AudioSource>();
 	}
 
 	public OrbType GetCurrentOrb()
@@ -88,5 +92,7 @@ public class OrbGun : MonoBehaviour
 		Rigidbody orbsRigidbody = orb.GetComponent<Rigidbody>();
 
 		orbsRigidbody.AddForce(transform.forward * orbSpeed);
+
+        audioSource.Play();
 	}
 }

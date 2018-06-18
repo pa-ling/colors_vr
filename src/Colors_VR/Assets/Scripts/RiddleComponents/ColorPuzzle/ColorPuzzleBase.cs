@@ -9,43 +9,21 @@ public class ColorPuzzleBase : MonoBehaviour {
     public Door door;
 	public NavMeshLink navMeshLink;
 
-    public AudioClip audioClip;
-
-    public void Awake()
-    {
-        foreach (Transform child in transform)
-        {
-            child.GetComponent<ColorPuzzle>().audioClip = audioClip;
-        }
-    }
-
     public void checkSolution()
     {
-        Renderer[] rend;
-
         foreach (Transform child in transform)
         {
-            if(child.gameObject.GetComponent<Renderer>() == null)
+            if (!child.GetComponent<ColorPuzzle>().finished)
             {
-                rend = child.gameObject.GetComponentsInChildren<Renderer>();
+                correct = false;
+                goto falseSolution;
             }
             else
             {
-                rend = new Renderer[] { child.gameObject.GetComponent<Renderer>() };
+                correct = true;
             }
 
-            foreach(Renderer render in rend)
-            {
-                if(render.material.color == Color.white)
-                {
-                    correct = false;
-                    goto falseSolution;
-                }
-                else
-                {
-                    correct = true;
-                }
-            }
+        
         }
         falseSolution:
         if (correct)
