@@ -9,13 +9,11 @@ public class TeleportRiddle : MonoBehaviour
 	public Door door;
 
 	private NavMeshSurface navMeshSurface;
-	private NavMeshLink[] navMeshLinks;
 	private Animator animator;
 
 	private void Start()
 	{
-		navMeshSurface = GetComponent<NavMeshSurface>();
-		navMeshLinks = GetComponents<NavMeshLink>();
+		navMeshSurface = GetComponentInParent<NavMeshSurface>();
 		animator = GetComponent<Animator>();
 
 		lift.OnCompanionEnterLift += LiftCompanionUp;
@@ -31,9 +29,6 @@ public class TeleportRiddle : MonoBehaviour
 			navMeshSurface.BuildNavMesh();
 			EnableCompanionsNavMeshAgent();
 			door.OpenDoor();
-
-			for (int i = 0; i < navMeshLinks.Length; ++i)
-				navMeshLinks[i].area = 0;
 		}
 	}
 

@@ -9,34 +9,25 @@ public class TeleportOrb : Orb
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        uint bitstring = (uint)ableToTeleportOnLayer.value;
-        for (int i = 31; bitstring > i; --i)
-        {
-            if ((bitstring >> i) > 0)
-            {
-                bitstring = ((bitstring << 32 - i) >> 32 - i);
-                if (collision.collider.gameObject.layer != i)
-                    return;
-            }
-        }
+		uint bitstring = (uint)ableToTeleportOnLayer.value;
+		for (int i = 31; bitstring > i; --i)
+		{
+			if ((bitstring >> i) > 0)
+			{
+				bitstring = ((bitstring << 32 - i) >> 32 - i);
+				if (collision.collider.gameObject.layer != i)
+					return;
+			}
+		}
 
-        if (collision.contacts[0].normal != collision.gameObject.transform.up)
-            return;
+		if (collision.contacts[0].normal != collision.gameObject.transform.up)
+			return;
 
-        base.OnCollisionEnter(collision);
+		base.OnCollisionEnter(collision);
 
-        if (!stopCollision)
-        {
-            StartCoroutine(Teleport(new Vector3(collision.contacts[0].point.x, collision.contacts[0].point.y, collision.contacts[0].point.z), 0.2f));
-            AudioSource.PlayClipAtPoint(splashSound, transform.position);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+		StartCoroutine(Teleport(new Vector3(collision.contacts[0].point.x, collision.contacts[0].point.y, collision.contacts[0].point.z), 0.2f));
 
-
-        meshRenderer.enabled = false;
+		meshRenderer.enabled = false;
 	}
 
 	private IEnumerator Teleport(Vector3 targetPosition, float targetTime)

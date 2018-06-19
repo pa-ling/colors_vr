@@ -11,7 +11,8 @@ public class VRPlayerController : MonoBehaviour
 
 	private void Start()
 	{
-		StartCoroutine(SetupControllers());
+		StartCoroutine(SetupLeftController());
+		StartCoroutine(SetupRightController());
 	}
 
 	private void Update()
@@ -24,16 +25,24 @@ public class VRPlayerController : MonoBehaviour
 			if (rightController.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad))
 				ChangeOrbType(rightController.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad));
 		}
+		else
+		{
+			StopCoroutine(SetupRightController());
+			StartCoroutine(SetupRightController());
+		}
 	}
 
-	private IEnumerator SetupControllers()
+	private IEnumerator SetupLeftController()
 	{
 		do
 		{
 			leftController = SteamVR_Controller.Input(SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost));
 			yield return null;
 		} while (leftController == null);
+	}
 
+	private IEnumerator SetupRightController()
+	{
 		do
 		{
 			rightController = SteamVR_Controller.Input(SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost));

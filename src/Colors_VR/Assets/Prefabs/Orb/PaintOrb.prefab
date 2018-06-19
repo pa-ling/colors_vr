@@ -110,15 +110,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7bd27ba1f89e84a81a2ac74364f95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splatMinSize: 0.5
-  splatMaxSize: 1.5
+  splatMinSize: 1
+  splatMaxSize: 1.25
   speed: 1000
+  colorChannel: 3
   splashSound: {fileID: 8300000, guid: a2671158580359a4c859397b56acb171, type: 3}
   dontLeaveSplatsOn:
     serializedVersion: 2
     m_Bits: 6144
   dropletParticleSystem: {fileID: 0}
-  stopCollision: 0
 --- !u!114 &114513894876472434
 MonoBehaviour:
   m_ObjectHideFlags: 1

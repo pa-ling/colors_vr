@@ -14,16 +14,26 @@ public class FadeWhenLeaveArea : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		SteamVR_Fade.Start(Color.black, fadeToBlackTime);
+		if (other.isTrigger)
+			return;
+
+		Color fadeBlack = new Color(0.0f, 0.0f, 0.0f, 0.99f);
+		SteamVR_Fade.Start(fadeBlack, fadeToBlackTime);
 	}
 
 	private void OnTriggerStay(Collider other)
 	{
+		if (other.isTrigger)
+			return;
+
 		vrPlayerController.Vibration(Time.deltaTime);
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
+		if (other.isTrigger)
+			return;
+
 		SteamVR_Fade.Start(Color.clear, fadeToClearTime);
 	}
 }

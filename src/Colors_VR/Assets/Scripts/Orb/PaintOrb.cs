@@ -6,11 +6,6 @@ public class PaintOrb : Orb
 	{
 		base.OnCollisionEnter(collision);
 
-        if (!stopCollision)
-        {
-            AudioSource.PlayClipAtPoint(splashSound, transform.position);
-        }
-
         Destroy(gameObject);
     }
 }

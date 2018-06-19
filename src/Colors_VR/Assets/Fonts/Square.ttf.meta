@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: b34d0f8202c96a64f92edd57f7567a96
+timeCreated: 1529403124
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: SquareFont
+  fontNames:
+  - SquareFont
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

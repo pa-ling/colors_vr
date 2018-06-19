@@ -2,22 +2,27 @@
 
 public class OrbGun : MonoBehaviour
 {
+	[Header("Layer Masks")]
 	public LayerMask dontCollidWith;
 	public LayerMask dontLeaveSplatsOn;
-	public Transform playerRoor;
+	[Header("Orb Prefabs")]
 	public GameObject commandOrb = null;
 	public GameObject paintOrb = null;
 	public GameObject physicsOrb = null;
 	public GameObject teleportOrb = null;
+	[Header("Transform for Teleport")]
+	public Transform playerRoor;
+	[Header("Companion")]
 	public Companion companion;
+
+	private MeshRenderer meshRenderer;
+	private AudioSource audioSource;
 
 	private OrbType currentOrb = OrbType.PaintOrb;
 	private CommandOrb commandOrbComponent;
 	private PaintOrb paintOrbComponent;
 	private PhysicsOrb physicsOrbComponent;
 	private TeleportOrb teleportOrbComponent;
-
-    private AudioSource audioSource;
 
 	private void Start()
 	{
@@ -31,6 +36,11 @@ public class OrbGun : MonoBehaviour
 				Physics.IgnoreLayerCollision(orbLayer, i);
 			}
 		}
+
+		meshRenderer = GetComponent<MeshRenderer>();
+		meshRenderer.material.color = paintOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+
+		audioSource = GetComponent<AudioSource>();
 
 		commandOrbComponent = commandOrb.GetComponent<CommandOrb>();
 		paintOrbComponent = paintOrb.GetComponent<PaintOrb>();
@@ -48,8 +58,6 @@ public class OrbGun : MonoBehaviour
 		physicsOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;
 		teleportOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;
 		teleportOrbComponent.playerTransform = playerRoor;
-
-        audioSource = GetComponent<AudioSource>();
 	}
 
 	public OrbType GetCurrentOrb()
@@ -60,6 +68,15 @@ public class OrbGun : MonoBehaviour
 	public void SetCurrentOrbTo(OrbType orbType)
 	{
 		currentOrb = orbType;
+
+		if (currentOrb == OrbType.CommandOrb)
+			meshRenderer.material.color = commandOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+		else if (currentOrb == OrbType.PaintOrb)
+			meshRenderer.material.color = paintOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+		else if (currentOrb == OrbType.PhysicsOrb)
+			meshRenderer.material.color = physicsOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+		else if (currentOrb == OrbType.TeleportOrb)
+			meshRenderer.material.color = teleportOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
 	}
 
 	public void Fire()
@@ -93,6 +110,6 @@ public class OrbGun : MonoBehaviour
 
 		orbsRigidbody.AddForce(transform.forward * orbSpeed);
 
-        audioSource.Play();
+		audioSource.Play();
 	}
 }

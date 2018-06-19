@@ -7,13 +7,15 @@ public class CommandOrb : Orb
 
     protected override void OnCollisionEnter(Collision collision)
 	{
+		if ((dontLeaveSplatsOn & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)
+		{
+			Destroy(gameObject);
+			return;
+		}
+
 		base.OnCollisionEnter(collision);
 
-        if (!stopCollision)
-        {
-            companion.MoveTo(collision.contacts[0].point);
-            AudioSource.PlayClipAtPoint(splashSound, transform.position);
-        }
+		companion.MoveTo(collision.contacts[0].point);
 
 		Destroy(gameObject);
 	}

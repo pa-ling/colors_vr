@@ -19,9 +19,6 @@ public class Orb : MonoBehaviour
 	protected MeshRenderer meshRenderer;
 	private SplatParticleSystem splatParticleSystem = null;
 
-    [HideInInspector]
-    public bool stopCollision;
-
     protected void Start()
 	{
 		splatParticleSystem = GameObject.Find("SplatParticleSystem").GetComponent<SplatParticleSystem>();
@@ -32,15 +29,14 @@ public class Orb : MonoBehaviour
 	protected virtual void OnCollisionEnter(Collision collision)
 	{
         if ((dontLeaveSplatsOn & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)
-        {
-            stopCollision = true;
-            return;
-        }
+			return;
 
         if (collision.gameObject.GetComponent<Paintable>() != null)
             SplatOnVertices(collision);
 		else
             Splat(collision);
+
+		AudioSource.PlayClipAtPoint(splashSound, transform.position);
 	}
 
 	private void Splat(Collision collision)

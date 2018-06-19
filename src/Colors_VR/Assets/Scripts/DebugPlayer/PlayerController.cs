@@ -6,8 +6,6 @@ public class PlayerController : MonoBehaviour
 	public float walkingSpeed = 5.0f;
 	public float sensitivity = 3.0f;
 
-	public Text infoText = null;
-
 	private OrbGun orbGun = null;
 
 	private void Start()
@@ -16,8 +14,6 @@ public class PlayerController : MonoBehaviour
 
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
-
-		infoText.text = orbGun.GetCurrentOrb().ToString();
 	}
 
 	private void Update()
@@ -48,6 +44,5 @@ public class PlayerController : MonoBehaviour
 			++orb;
 
 		orbGun.SetCurrentOrbTo(orb);
-		infoText.text = orb.ToString();
 	}
 }
