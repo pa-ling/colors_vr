@@ -36,7 +36,7 @@ public class Orb : MonoBehaviour
 		else
             Splat(collision);
 
-		AudioSource.PlayClipAtPoint(splashSound, transform.position);
+		AudioSource.PlayClipAtPoint(splashSound, transform.position, 35);
 	}
 
 	private void Splat(Collision collision)
