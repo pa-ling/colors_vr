@@ -9,19 +9,18 @@ public class MovablePhysicsObject : MonoBehaviour {
     public bool shouldTeleportOrbVanish;
     public bool canTeleport;
 
-	// Use this for initialization
 	void Start () {
         renderer = GetComponent<Renderer>();
 	}
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "PhysicsOrb(Clone)")           //TODO: change to tag?
+        if (collision.gameObject.GetComponent<PhysicsOrb>() != null)
         {
             StartCoroutine(fade(renderer.material, renderer.material.color, collision.gameObject.GetComponent<Renderer>().material.color, timerForFade, false));
         }
 
-        if (collision.gameObject.name == "TeleportOrb(Clone)" && shouldTeleportOrbVanish)        //Orb
+        if (collision.gameObject.GetComponent<TeleportOrb>() != null && shouldTeleportOrbVanish)
         {
             if (canTeleport)
             {
