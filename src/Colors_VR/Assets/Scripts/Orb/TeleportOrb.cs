@@ -30,7 +30,7 @@ public class TeleportOrb : Orb
 		meshRenderer.enabled = false;
 	}
 
-	private IEnumerator Teleport(Vector3 targetPosition, float targetTime)
+	public IEnumerator Teleport(Vector3 targetPosition, float targetTime)
 	{
 		SteamVR_Fade.Start(Color.black, 0.1f);
 		yield return new WaitForSeconds(0.1f);
