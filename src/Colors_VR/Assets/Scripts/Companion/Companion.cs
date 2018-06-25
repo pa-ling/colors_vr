@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class Companion : MonoBehaviour
@@ -7,13 +8,18 @@ public class Companion : MonoBehaviour
 	private Animator animator;
 	private bool ignoreCommands = false;
 
-    private AudioSource audioSource;
+    private AudioSource movementSound;
+    private AudioSource speakingSound;
+
+    public AudioClip[] speakingClips;
 
 	private void Start()
 	{
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
+        movementSound = GetComponents<AudioSource>()[0];
+        speakingSound = GetComponents<AudioSource>()[1];
+        StartCoroutine("StartSpeaking");
 	}
 
 	private void Update()
@@ -24,14 +30,14 @@ public class Companion : MonoBehaviour
 
         if(navMeshAgent.velocity != Vector3.zero)
         {
-            if (!audioSource.isPlaying)
+            if (!movementSound.isPlaying)
             {
-                audioSource.Play();
+                movementSound.Play();
             }
         }
         else
         {
-            audioSource.Pause();
+            movementSound.Pause();
         }
 
 
@@ -73,4 +79,12 @@ public class Companion : MonoBehaviour
 	{
 		navMeshAgent.enabled = state;
 	}
+
+    private IEnumerator StartSpeaking()
+    {
+        yield return new WaitForSeconds(5);
+        speakingSound.clip = speakingClips[0];
+        speakingSound.Play();
+        yield return null;
+    }
 }

@@ -18,7 +18,7 @@ public class OrbGun : MonoBehaviour
 	private MeshRenderer meshRenderer;
 	private AudioSource audioSource;
 
-	private OrbType currentOrb = OrbType.PaintOrb;
+	private OrbType currentOrb/* = OrbType.PaintOrb*/;
 	private CommandOrb commandOrbComponent;
 	private PaintOrb paintOrbComponent;
 	private PhysicsOrb physicsOrbComponent;
@@ -38,9 +38,9 @@ public class OrbGun : MonoBehaviour
 		}
 
 		meshRenderer = GetComponent<MeshRenderer>();
-		meshRenderer.material.color = paintOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+        //meshRenderer.material.color = paintOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
 
-		audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
 		commandOrbComponent = commandOrb.GetComponent<CommandOrb>();
 		paintOrbComponent = paintOrb.GetComponent<PaintOrb>();
@@ -69,15 +69,15 @@ public class OrbGun : MonoBehaviour
 	{
 		currentOrb = orbType;
 
-		if (currentOrb == OrbType.CommandOrb)
-			meshRenderer.material.color = commandOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
-		else if (currentOrb == OrbType.PaintOrb)
-			meshRenderer.material.color = paintOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
-		else if (currentOrb == OrbType.PhysicsOrb)
-			meshRenderer.material.color = physicsOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
-		else if (currentOrb == OrbType.TeleportOrb)
-			meshRenderer.material.color = teleportOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
-	}
+        if (currentOrb == OrbType.CommandOrb)
+            meshRenderer.material.color = commandOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+        else if (currentOrb == OrbType.PaintOrb)
+            meshRenderer.material.color = paintOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+        else if (currentOrb == OrbType.PhysicsOrb)
+            meshRenderer.material.color = physicsOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+        else if (currentOrb == OrbType.TeleportOrb)
+            meshRenderer.material.color = teleportOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+    }
 
 	public void Fire()
 	{
