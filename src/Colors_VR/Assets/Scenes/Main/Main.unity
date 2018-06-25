@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -21043,6 +21043,16 @@ Prefab:
       propertyPath: audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 8b87741a248ba76448b01dc02443b0d4, type: 3}
+    - target: {fileID: 114749482942023110, guid: 00d58089b61e59c4c906728385fbc68b,
+        type: 2}
+      propertyPath: errorSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 28e4ee3daf5ff06429e46b1b42fe29af, type: 3}
+    - target: {fileID: 114749482942023110, guid: 00d58089b61e59c4c906728385fbc68b,
+        type: 2}
+      propertyPath: splashSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 8b87741a248ba76448b01dc02443b0d4, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00d58089b61e59c4c906728385fbc68b, type: 2}
   m_IsPrefabParent: 0
@@ -22216,6 +22226,21 @@ Prefab:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 28e4ee3daf5ff06429e46b1b42fe29af, type: 3}
+    - target: {fileID: 82572936338054236, guid: 3a483e85dbaedaf45827ba891edbf7c0,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82572936338054236, guid: 3a483e85dbaedaf45827ba891edbf7c0,
+        type: 2}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 82834455762544960, guid: 3a483e85dbaedaf45827ba891edbf7c0,
+        type: 2}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114754822609252510, guid: 3a483e85dbaedaf45827ba891edbf7c0, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 3a483e85dbaedaf45827ba891edbf7c0, type: 2}
