@@ -27,19 +27,28 @@ public class TeleportOrb : Orb
 
 		StartCoroutine(Teleport(new Vector3(collision.contacts[0].point.x, collision.contacts[0].point.y, collision.contacts[0].point.z), 0.2f));
 
-		meshRenderer.enabled = false;
+        Collider collider = GetComponent<Collider>();
+        collider.enabled = false;
+        meshRenderer.enabled = false;
 	}
 
 	public IEnumerator Teleport(Vector3 targetPosition, float targetTime)
 	{
-		SteamVR_Fade.Start(Color.black, 0.1f);
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.Play();
+
+        SteamVR_Fade.Start(Color.black, 0.1f);
 		yield return new WaitForSeconds(0.1f);
 
 		playerTransform.position = targetPosition;
 
-		SteamVR_Fade.Start(Color.clear, 0.1f);
+        SteamVR_Fade.Start(Color.clear, 0.1f);
 		yield return new WaitForSeconds(0.1f);
 
-		Destroy(gameObject);
-	}
+        while (audioSource.isPlaying)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+        Destroy(gameObject);
+    }
 }
