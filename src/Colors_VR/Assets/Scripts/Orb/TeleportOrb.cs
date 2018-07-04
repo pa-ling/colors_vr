@@ -7,7 +7,16 @@ public class TeleportOrb : Orb
 	public Transform playerTransform;
 	public LayerMask ableToTeleportOnLayer;
 
-    protected override void OnCollisionEnter(Collision collision)
+	private AudioSource audioSource;
+
+	protected override void Start()
+	{
+		base.Start();
+
+		audioSource = GetComponent<AudioSource>();
+	}
+
+	private void OnCollisionEnter(Collision collision)
     {
 		uint bitstring = (uint)ableToTeleportOnLayer.value;
 		for (int i = 31; bitstring > i; --i)
@@ -23,23 +32,36 @@ public class TeleportOrb : Orb
 		if (collision.contacts[0].normal != collision.gameObject.transform.up)
 			return;
 
-		base.OnCollisionEnter(collision);
+		if ((dontLeaveSplatsOn & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)
+			return;
+
+		Splat(collision);
+
+		AudioSource.PlayClipAtPoint(splashSound, transform.position, 35.0f);
 
 		StartCoroutine(Teleport(new Vector3(collision.contacts[0].point.x, collision.contacts[0].point.y, collision.contacts[0].point.z), 0.2f));
 
-		meshRenderer.enabled = false;
+        Collider collider = GetComponent<Collider>();
+        collider.enabled = false;
+        meshRenderer.enabled = false;
 	}
 
-	private IEnumerator Teleport(Vector3 targetPosition, float targetTime)
+	public IEnumerator Teleport(Vector3 targetPosition, float targetTime)
 	{
-		SteamVR_Fade.Start(Color.black, 0.1f);
-		yield return new WaitForSeconds(0.1f);
+        audioSource.Play();
+
+        SteamVR_Fade.Start(Color.black, targetTime / 2.0f);
+		yield return new WaitForSeconds(targetTime / 2.0f);
 
 		playerTransform.position = targetPosition;
 
-		SteamVR_Fade.Start(Color.clear, 0.1f);
-		yield return new WaitForSeconds(0.1f);
+        SteamVR_Fade.Start(Color.clear, targetTime / 2.0f);
+		yield return new WaitForSeconds(targetTime / 2.0f);
 
-		Destroy(gameObject);
-	}
+        while (audioSource.isPlaying)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+        Destroy(gameObject);
+    }
 }

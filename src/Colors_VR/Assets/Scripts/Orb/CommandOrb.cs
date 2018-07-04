@@ -5,15 +5,14 @@ public class CommandOrb : Orb
 	[HideInInspector]
 	public Companion companion;
 
-    protected override void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision)
 	{
 		if ((dontLeaveSplatsOn & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)
-		{
-			Destroy(gameObject);
 			return;
-		}
 
-		base.OnCollisionEnter(collision);
+		Splat(collision);
+
+		AudioSource.PlayClipAtPoint(splashSound, transform.position, 35.0f);
 
 		companion.MoveTo(collision.contacts[0].point);
 

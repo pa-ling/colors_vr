@@ -7,9 +7,13 @@ public class OrbGun : MonoBehaviour
 	public LayerMask dontLeaveSplatsOn;
 	[Header("Orb Prefabs")]
 	public GameObject commandOrb = null;
+	public bool commandOrbIsActive = false;
 	public GameObject paintOrb = null;
+	public bool paintOrbIsActive = false;
 	public GameObject physicsOrb = null;
+	public bool physicsOrbIsActive = false;
 	public GameObject teleportOrb = null;
+	public bool teleportOrbIsActive = false;
 	[Header("Transform for Teleport")]
 	public Transform playerRoor;
 	[Header("Companion")]
@@ -18,11 +22,13 @@ public class OrbGun : MonoBehaviour
 	private MeshRenderer meshRenderer;
 	private AudioSource audioSource;
 
-	private OrbType currentOrb = OrbType.PaintOrb;
+	private OrbType currentOrb = OrbType.None;
 	private CommandOrb commandOrbComponent;
 	private PaintOrb paintOrbComponent;
 	private PhysicsOrb physicsOrbComponent;
 	private TeleportOrb teleportOrbComponent;
+
+	private MeshRenderer viveTrackpadMeshRenderer = null;
 
 	private void Start()
 	{
@@ -38,9 +44,9 @@ public class OrbGun : MonoBehaviour
 		}
 
 		meshRenderer = GetComponent<MeshRenderer>();
-		meshRenderer.material.color = paintOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+		meshRenderer.enabled = false;
 
-		audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
 		commandOrbComponent = commandOrb.GetComponent<CommandOrb>();
 		paintOrbComponent = paintOrb.GetComponent<PaintOrb>();
@@ -65,18 +71,25 @@ public class OrbGun : MonoBehaviour
 		return currentOrb;
 	}
 
-	public void SetCurrentOrbTo(OrbType orbType)
+	public bool SetCurrentOrbTo(OrbType orbType)
 	{
+		if (currentOrb == orbType)
+			return false;
+		else if (orbType == OrbType.CommandOrb && commandOrbIsActive)
+			meshRenderer.material.color = commandOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+		else if (orbType == OrbType.PaintOrb && paintOrbIsActive)
+			meshRenderer.material.color = paintOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+		else if (orbType == OrbType.PhysicsOrb && physicsOrbIsActive)
+			meshRenderer.material.color = physicsOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+		else if (orbType == OrbType.TeleportOrb && teleportOrbIsActive)
+			meshRenderer.material.color = teleportOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+		else
+			return false;
+
+		meshRenderer.enabled = true;
 		currentOrb = orbType;
 
-		if (currentOrb == OrbType.CommandOrb)
-			meshRenderer.material.color = commandOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
-		else if (currentOrb == OrbType.PaintOrb)
-			meshRenderer.material.color = paintOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
-		else if (currentOrb == OrbType.PhysicsOrb)
-			meshRenderer.material.color = physicsOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
-		else if (currentOrb == OrbType.TeleportOrb)
-			meshRenderer.material.color = teleportOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
+		return true;
 	}
 
 	public void Fire()
@@ -104,6 +117,8 @@ public class OrbGun : MonoBehaviour
 			orbPrefab = teleportOrb;
 			orbSpeed = teleportOrbComponent.speed;
 		}
+		else
+			return;
 
 		GameObject orb = Instantiate(orbPrefab, transform.position, transform.rotation);
 		Rigidbody orbsRigidbody = orb.GetComponent<Rigidbody>();
@@ -111,5 +126,42 @@ public class OrbGun : MonoBehaviour
 		orbsRigidbody.AddForce(transform.forward * orbSpeed);
 
 		audioSource.Play();
+	}
+
+	public void SetOrbActive(OrbType orbType, Material material)
+	{
+		if (orbType == OrbType.CommandOrb)
+			commandOrbIsActive = true;
+		else if (orbType == OrbType.PaintOrb)
+			paintOrbIsActive = true;
+		else if (orbType == OrbType.PhysicsOrb)
+			physicsOrbIsActive = true;
+		else if (orbType == OrbType.TeleportOrb)
+			teleportOrbIsActive = true;
+
+		if (viveTrackpadMeshRenderer != null && material != null)
+			viveTrackpadMeshRenderer.material = material;
+
+		if (currentOrb == OrbType.None)
+			SetCurrentOrbTo(orbType);
+	}
+
+	public bool IsOrbActive(OrbType orbType)
+	{
+		if (orbType == OrbType.CommandOrb && commandOrbIsActive)
+			return true;
+		else if (orbType == OrbType.PaintOrb && paintOrbIsActive)
+			return true;
+		else if (orbType == OrbType.PhysicsOrb && physicsOrbIsActive)
+			return true;
+		else if (orbType == OrbType.TeleportOrb && teleportOrbIsActive)
+			return true;
+		else
+			return false;
+	}
+
+	public void SetViveTrackpadMeshRenderer(MeshRenderer meshRenderer)
+	{
+		viveTrackpadMeshRenderer = meshRenderer;
 	}
 }

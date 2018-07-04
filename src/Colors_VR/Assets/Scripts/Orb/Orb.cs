@@ -7,7 +7,6 @@ public class Orb : MonoBehaviour
 	public float splatMinSize = 0.5f;
 	public float splatMaxSize = 1.5f;
 	public float speed = 500.0f;
-    public int colorChannel = 3;
 
     public AudioClip splashSound;
 
@@ -19,27 +18,14 @@ public class Orb : MonoBehaviour
 	protected MeshRenderer meshRenderer;
 	private SplatParticleSystem splatParticleSystem = null;
 
-    protected void Start()
+    protected virtual void Start()
 	{
 		splatParticleSystem = GameObject.Find("SplatParticleSystem").GetComponent<SplatParticleSystem>();
 		dropletParticleSystem = GameObject.Find("DropletParticleSystem").GetComponent<ParticleSystem>();
 		meshRenderer = GetComponent<MeshRenderer>();
 	}
 
-	protected virtual void OnCollisionEnter(Collision collision)
-	{
-        if ((dontLeaveSplatsOn & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)
-			return;
-
-        if (collision.gameObject.GetComponent<Paintable>() != null)
-            SplatOnVertices(collision);
-		else
-            Splat(collision);
-
-		AudioSource.PlayClipAtPoint(splashSound, transform.position, 35);
-	}
-
-	private void Splat(Collision collision)
+	protected void Splat(Collision collision)
 	{
 		SplatParticle splatParticle = new SplatParticle();
 		splatParticle.position = collision.contacts[0].point;
@@ -59,9 +45,4 @@ public class Orb : MonoBehaviour
 		mainModule.startColor = meshRenderer.material.color;
 		dropletParticleSystem.Emit(Random.Range(3, 6));
 	}
-
-    private void SplatOnVertices (Collision collision)
-    {
-        collision.collider.GetComponent<Paintable>().ApplyPaint(collision.contacts[0].point, 0.05f, 0.3f, colorChannel);
-    }
 }

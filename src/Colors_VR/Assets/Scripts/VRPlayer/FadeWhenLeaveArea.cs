@@ -26,7 +26,7 @@ public class FadeWhenLeaveArea : MonoBehaviour
 		if (other.isTrigger)
 			return;
 
-		vrPlayerController.Vibration(Time.deltaTime);
+		vrPlayerController.Vibration(ViveController.BOTH, Time.deltaTime);
 	}
 
 	private void OnTriggerExit(Collider other)

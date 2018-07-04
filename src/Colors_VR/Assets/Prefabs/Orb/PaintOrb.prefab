@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4848652899147812}
   - component: {fileID: 33864995780256544}
-  - component: {fileID: 135594842459267132}
   - component: {fileID: 23335404418564740}
+  - component: {fileID: 135594842459267132}
   - component: {fileID: 54493002491426452}
   - component: {fileID: 114480312245961284}
   - component: {fileID: 114513894876472434}
@@ -113,7 +113,6 @@ MonoBehaviour:
   splatMinSize: 1
   splatMaxSize: 1.25
   speed: 1000
-  colorChannel: 3
   splashSound: {fileID: 8300000, guid: a2671158580359a4c859397b56acb171, type: 3}
   dontLeaveSplatsOn:
     serializedVersion: 2

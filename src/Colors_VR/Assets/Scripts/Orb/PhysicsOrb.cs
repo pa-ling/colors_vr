@@ -2,10 +2,15 @@
 
 public class PhysicsOrb : Orb
 {
-    protected override void OnCollisionEnter(Collision collision)
+	private void OnCollisionEnter(Collision collision)
 	{
-		base.OnCollisionEnter(collision);
+		if ((dontLeaveSplatsOn & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)
+			return;
 
-        Destroy(gameObject);
+		Splat(collision);
+
+		AudioSource.PlayClipAtPoint(splashSound, transform.position, 35.0f);
+
+		Destroy(gameObject);
 	}
 }

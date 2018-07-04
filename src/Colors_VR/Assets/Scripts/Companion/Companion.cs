@@ -5,15 +5,16 @@ public class Companion : MonoBehaviour
 {
 	private NavMeshAgent navMeshAgent;
 	private Animator animator;
-	private bool ignoreCommands = false;
 
-    private AudioSource audioSource;
+    private AudioSource movementAudioSource;
+    private AudioSource speakingAudioSource;
 
 	private void Start()
 	{
 		navMeshAgent = GetComponent<NavMeshAgent>();
 		animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
+		movementAudioSource = GetComponents<AudioSource>()[0];
+		speakingAudioSource = GetComponents<AudioSource>()[1];
 	}
 
 	private void Update()
@@ -24,53 +25,26 @@ public class Companion : MonoBehaviour
 
         if(navMeshAgent.velocity != Vector3.zero)
         {
-            if (!audioSource.isPlaying)
+            if (!movementAudioSource.isPlaying)
             {
-                audioSource.Play();
+				movementAudioSource.Play();
             }
         }
         else
         {
-            audioSource.Pause();
+			movementAudioSource.Pause();
         }
-
-
-	}
-
-	private void OnTriggerEnter(Collider other)
-	{
-		Lift lift = other.gameObject.GetComponent<Lift>();
-		if (lift != null)
-		{
-			if (transform.parent == null)
-				transform.SetParent(other.gameObject.transform);
-			lift.CompanionEntersLift();
-		}
-	}
-
-	private void OnTriggerExit(Collider other)
-	{
-		Lift lift = other.gameObject.GetComponent<Lift>();
-		if (lift != null)
-		{
-			transform.SetParent(null);
-			lift.CompanionLeftLift();
-		}
 	}
 
 	public void MoveTo(Vector3 position)
 	{
-		if (!ignoreCommands)
-			navMeshAgent.destination = position;
+		navMeshAgent.destination = position;
 	}
 
-	public void IgnoreCommand(bool state)
-	{
-		ignoreCommands = state;
-	}
-
-	public void SetNavMeshAgentActive(bool state)
-	{
-		navMeshAgent.enabled = state;
-	}
+    public void StartSpeaking(AudioClip audioClip)
+    {
+		speakingAudioSource.Stop();
+		speakingAudioSource.clip = audioClip;
+		speakingAudioSource.Play();
+    }
 }

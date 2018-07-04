@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,9 +9,9 @@ public class PlayerController : MonoBehaviour
 
 	private void Start()
 	{
-		orbGun = GetComponentInChildren<OrbGun>();
+        orbGun = GetComponentInChildren<OrbGun>();
 
-		Cursor.visible = false;
+        Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 
@@ -27,7 +26,7 @@ public class PlayerController : MonoBehaviour
 		transform.Rotate(0.0f, mouseX, 0.0f);
 		transform.Find("[Camera]").transform.Rotate(mouseY, 0.0f, 0.0f);
 
-		if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
 			orbGun.Fire();
 
 		if (Input.GetKeyDown(KeyCode.Mouse1))
@@ -38,11 +37,15 @@ public class PlayerController : MonoBehaviour
 	{
 		OrbType orb = orbGun.GetCurrentOrb();
 
-		if (orb == OrbType.TeleportOrb)
-			orb = OrbType.CommandOrb;
-		else
-			++orb;
+		if (orb == OrbType.None)
+			return;
 
-		orbGun.SetCurrentOrbTo(orb);
+		do
+		{
+			if (orb == OrbType.TeleportOrb)
+				orb = OrbType.CommandOrb;
+			else
+				++orb;
+		} while(!orbGun.SetCurrentOrbTo(orb));
 	}
 }
