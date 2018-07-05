@@ -24,8 +24,11 @@ public class Door : MonoBehaviour
 
 	public void OpenDoor()
 	{
-		animator.SetBool("Open", true);
-		audioSource.Play();
+        if (!animator.GetBool("Open"))
+        {
+            animator.SetBool("Open", true);
+            audioSource.Play();
+        }
 	}
 
 	public void CloseDoor()

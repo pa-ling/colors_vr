@@ -10,7 +10,8 @@ public class ColorPuzzle : MonoBehaviour {
     [HideInInspector]
     public bool finished = false;
 
-    public AudioClip audioClip;
+    private AudioClip splashSound;
+    private AudioClip errorSound;
 
 	void Start () {
         if(GetComponent<Renderer>() == null)
@@ -21,6 +22,9 @@ public class ColorPuzzle : MonoBehaviour {
         {
             ownRend = new Renderer[] { GetComponent<Renderer>() };
         }
+
+        splashSound = transform.parent.GetComponent<ColorPuzzleBase>().splashSound;
+        errorSound = transform.parent.GetComponent<ColorPuzzleBase>().errorSound;
     }
 
     public void changeColor(Color color)
@@ -50,11 +54,12 @@ public class ColorPuzzle : MonoBehaviour {
                         render.material.color = color;
                     }
 
-                    StartCoroutine(fade(neighbourRender.material, neighbourRender.material.color, Color.white, 2));
+                    StartCoroutine(fade(neighbourRender.material, neighbourRender.material.color, Color.white, 1));
                     foreach (Renderer render in ownRend)
                     {
-                        StartCoroutine(fade(render.material, render.material.color, Color.white, 2));
+                        StartCoroutine(fade(render.material, render.material.color, Color.white, 1));
                     }
+                    AudioSource.PlayClipAtPoint(errorSound, transform.position, 50);
                     changeColor = false;
                 }
             }
@@ -77,7 +82,7 @@ public class ColorPuzzle : MonoBehaviour {
         if (!transform.parent.GetComponent<ColorPuzzleBase>().getIfSolutionIsCorrect())
         {
             changeColor(collision.gameObject.GetComponent<Renderer>().material.color);
-            AudioSource.PlayClipAtPoint(audioClip, transform.position);
+            AudioSource.PlayClipAtPoint(splashSound, transform.position);
             Destroy(collision.gameObject);
         }
     }

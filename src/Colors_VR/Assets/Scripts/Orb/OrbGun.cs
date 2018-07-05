@@ -74,7 +74,7 @@ public class OrbGun : MonoBehaviour
 	public bool SetCurrentOrbTo(OrbType orbType)
 	{
 		if (currentOrb == orbType)
-			return false;
+			return true;
 		else if (orbType == OrbType.CommandOrb && commandOrbIsActive)
 			meshRenderer.material.color = commandOrb.GetComponent<MeshRenderer>().sharedMaterial.color;
 		else if (orbType == OrbType.PaintOrb && paintOrbIsActive)

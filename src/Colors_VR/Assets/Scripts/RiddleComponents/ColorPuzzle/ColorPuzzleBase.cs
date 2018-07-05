@@ -5,6 +5,9 @@ public class ColorPuzzleBase : MonoBehaviour {
     private bool correct = false;
     public Door door;
 
+    public AudioClip splashSound;
+    public AudioClip errorSound;
+
     public void checkSolution()
     {
         foreach (Transform child in transform)

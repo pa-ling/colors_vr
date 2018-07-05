@@ -34,6 +34,8 @@ public class Companion : MonoBehaviour
         {
 			movementAudioSource.Pause();
         }
+
+        transform.LookAt(Camera.main.transform);
 	}
 
 	public void MoveTo(Vector3 position)
