@@ -111,9 +111,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splatMinSize: 0.5
-  splatMaxSize: 0.75
+  splatMaxSize: 1
   speed: 5000
   splashSound: {fileID: 8300000, guid: a2671158580359a4c859397b56acb171, type: 3}
+  splatDecal: {fileID: 1901491593075088, guid: ccba5526987c6d54e8c628092ac1e491, type: 2}
+  splatMaterial: {fileID: 2100000, guid: 4e29fb171045c2e4b823e0695bee15d2, type: 2}
   dontLeaveSplatsOn:
     serializedVersion: 2
     m_Bits: 6144

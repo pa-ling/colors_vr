@@ -110,10 +110,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7bd27ba1f89e84a81a2ac74364f95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splatMinSize: 1
-  splatMaxSize: 1.25
+  splatMinSize: 2
+  splatMaxSize: 3
   speed: 1000
   splashSound: {fileID: 8300000, guid: a2671158580359a4c859397b56acb171, type: 3}
+  splatDecal: {fileID: 1901491593075088, guid: ccba5526987c6d54e8c628092ac1e491, type: 2}
+  splatMaterial: {fileID: 2100000, guid: 7c4b69c4f0776374087b84a8b536b5c7, type: 2}
   dontLeaveSplatsOn:
     serializedVersion: 2
     m_Bits: 6144
