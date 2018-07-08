@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class VRPlayerController : MonoBehaviour
 {
+	public Companion companion;
+
+	[Header("OrbGuns")]
 	public OrbGun leftOrbGun;
 	public OrbGun rightOrbGun;
 
@@ -11,6 +14,8 @@ public class VRPlayerController : MonoBehaviour
 
 	private void Start()
 	{
+		companion.autoFollowTransform = transform.Find("AutoFollowPosition");
+
 		StartCoroutine(SetupLeftController());
 		StartCoroutine(SetupRightController());
 	}

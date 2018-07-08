@@ -23,6 +23,8 @@ public class Key : MonoBehaviour
         if (collision.gameObject.GetComponent<PhysicsOrb>() == null)
             return;
 
+		Destroy(collision.gameObject);
+
 		if (keypad.isSolved)
 			return;
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class OrbGun : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class OrbGun : MonoBehaviour
 	public Transform playerRoor;
 	[Header("Companion")]
 	public Companion companion;
+
+	public event Action<OrbType> OnOrbShot;
+	public event Action<OrbType> OnChangeOrb;
 
 	private MeshRenderer meshRenderer;
 	private AudioSource audioSource;
@@ -89,6 +93,9 @@ public class OrbGun : MonoBehaviour
 		meshRenderer.enabled = true;
 		currentOrb = orbType;
 
+		if (OnChangeOrb != null)
+			OnChangeOrb(currentOrb);
+
 		return true;
 	}
 
@@ -126,6 +133,9 @@ public class OrbGun : MonoBehaviour
 		orbsRigidbody.AddForce(transform.forward * orbSpeed);
 
 		audioSource.Play();
+
+		if (OnOrbShot != null)
+			OnOrbShot(currentOrb);
 	}
 
 	public void SetOrbActive(OrbType orbType, Material material)
@@ -142,8 +152,7 @@ public class OrbGun : MonoBehaviour
 		if (viveTrackpadMeshRenderer != null && material != null)
 			viveTrackpadMeshRenderer.material = material;
 
-		if (currentOrb == OrbType.None)
-			SetCurrentOrbTo(orbType);
+		SetCurrentOrbTo(orbType);
 	}
 
 	public bool IsOrbActive(OrbType orbType)

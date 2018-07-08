@@ -2,6 +2,9 @@
 
 public class PlayerController : MonoBehaviour
 {
+	public Companion companion;
+
+	[Header("Movement")]
 	public float walkingSpeed = 5.0f;
 	public float sensitivity = 3.0f;
 
@@ -9,7 +12,9 @@ public class PlayerController : MonoBehaviour
 
 	private void Start()
 	{
-        orbGun = GetComponentInChildren<OrbGun>();
+		companion.autoFollowTransform = transform.Find("AutoFollowPosition");
+
+		orbGun = GetComponentInChildren<OrbGun>();
 
         Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;

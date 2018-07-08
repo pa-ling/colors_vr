@@ -19,7 +19,6 @@ public class TakeOrb : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-		Debug.Log("OnTriggerEnter: " + other.gameObject.layer);
         if(other.gameObject.layer == 9 && !taken)
         {
             taken = true;
