@@ -19,14 +19,16 @@ public class IntroductionRoom : MonoBehaviour
 	private bool teleportOrbWasShot;
 	private bool orbChanged;
 
+	private GameObject player;
+
 	private void Start()
 	{
-		GameObject player = GameObject.Find("[DebugPlayer]");
+		player = GameObject.Find("[DebugPlayer]");
 
-		if (!player.activeInHierarchy)
+		if (player == null)
 			player = GameObject.Find("[CameraRig]");
 
-		OrbGun[] orbGuns = player.GetComponentsInChildren<OrbGun>();
+		OrbGun[] orbGuns = player.GetComponentsInChildren<OrbGun>(true);
 
 		for (int i = 0; i < orbGuns.Length; ++i)
 		{
@@ -98,12 +100,17 @@ public class IntroductionRoom : MonoBehaviour
 		companion.StartSpeaking(audioClips[4]);
 		yield return new WaitForSeconds(audioClips[4].length + delay);
 
-		//Blinking Trigger
+		VRPlayerController vrPlayerController = player.GetComponent<VRPlayerController>();
+		if (vrPlayerController != null)
+			vrPlayerController.StartBlinkingTrigger();
 
 		do
 		{
 			yield return new WaitForSeconds(1.0f);
 		} while (!paintOrbWasShot);
+
+		if (vrPlayerController != null)
+			vrPlayerController.StopBlinkTrigger();
 
 		companion.StartSpeaking(audioClips[5]);
 		yield return new WaitForSeconds(audioClips[5].length + delay);
@@ -134,12 +141,18 @@ public class IntroductionRoom : MonoBehaviour
 		companion.StartSpeaking(audioClips[7]);
 		yield return new WaitForSeconds(audioClips[7].length + delay);
 
-		//Blinking Trackpad
+		orbChanged = false;
+
+		//if (vrPlayerController != null)
+		//	vrPlayerController.StartBlinkingTrackpad();
 
 		do
 		{
 			yield return new WaitForSeconds(1.0f);
 		} while (!orbChanged);
+
+		//if (vrPlayerController != null)
+		//	vrPlayerController.StopBlinkTrackpad();
 
 		companion.StartSpeaking(audioClips[8]);
 		yield return new WaitForSeconds(audioClips[8].length + delay);

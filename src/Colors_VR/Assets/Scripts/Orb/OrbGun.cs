@@ -173,4 +173,9 @@ public class OrbGun : MonoBehaviour
 	{
 		viveTrackpadMeshRenderer = meshRenderer;
 	}
+
+	public MeshRenderer GetViveTrackpadMeshRenderer()
+	{
+		return viveTrackpadMeshRenderer;
+	}
 }

@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
 	private void Start()
 	{
-		companion.autoFollowTransform = transform.Find("AutoFollowPosition");
+		companion.autoFollowTransforms = GetComponentInChildren<AutoFollowPosition>().GetAutoFollowPositions();
 
 		orbGun = GetComponentInChildren<OrbGun>();
 

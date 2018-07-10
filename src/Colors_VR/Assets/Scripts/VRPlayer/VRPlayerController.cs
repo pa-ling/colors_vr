@@ -3,18 +3,22 @@ using UnityEngine;
 
 public class VRPlayerController : MonoBehaviour
 {
+	[Header("Companion")]
 	public Companion companion;
 
 	[Header("OrbGuns")]
 	public OrbGun leftOrbGun;
 	public OrbGun rightOrbGun;
 
+	[Header("Material")]
+	public Material triggerMaterial;
+
 	private SteamVR_Controller.Device leftController;
 	private SteamVR_Controller.Device rightController;
 
 	private void Start()
 	{
-		companion.autoFollowTransform = transform.Find("AutoFollowPosition");
+		companion.autoFollowTransforms = GetComponentInChildren<AutoFollowPosition>().GetAutoFollowPositions();
 
 		StartCoroutine(SetupLeftController());
 		StartCoroutine(SetupRightController());
@@ -60,15 +64,23 @@ public class VRPlayerController : MonoBehaviour
 		} while (leftController == null);
 
 		SteamVR_ControllerManager steamVR_ControllerManager = GetComponent<SteamVR_ControllerManager>();
-		Transform touchPad = null;
+		Transform transform = null;
 
 		do
 		{
-			touchPad = steamVR_ControllerManager.left.transform.Find("Model/trackpad");
+			transform = steamVR_ControllerManager.left.transform.Find("Model/trackpad");
 			yield return null;
-		} while (touchPad == null);
+		} while (transform == null);
 
-		leftOrbGun.SetViveTrackpadMeshRenderer(touchPad.gameObject.GetComponent<MeshRenderer>());
+		leftOrbGun.SetViveTrackpadMeshRenderer(transform.gameObject.GetComponent<MeshRenderer>());
+
+		do
+		{
+			transform = steamVR_ControllerManager.left.transform.Find("Model/trigger");
+			yield return null;
+		} while (transform == null);
+
+		transform.gameObject.GetComponent<MeshRenderer>().material = triggerMaterial;
 	}
 
 	private IEnumerator SetupRightController()
@@ -80,15 +92,23 @@ public class VRPlayerController : MonoBehaviour
 		} while (rightController == null);
 
 		SteamVR_ControllerManager steamVR_ControllerManager = GetComponent<SteamVR_ControllerManager>();
-		Transform touchPad = null;
+		Transform transform = null;
 
 		do
 		{
-			touchPad = steamVR_ControllerManager.right.transform.Find("Model/trackpad");
+			transform = steamVR_ControllerManager.right.transform.Find("Model/trackpad");
 			yield return null;
-		} while (touchPad == null);
+		} while (transform == null);
 
-		rightOrbGun.SetViveTrackpadMeshRenderer(touchPad.gameObject.GetComponent<MeshRenderer>());
+		rightOrbGun.SetViveTrackpadMeshRenderer(transform.gameObject.GetComponent<MeshRenderer>());
+
+		do
+		{
+			transform = steamVR_ControllerManager.right.transform.Find("Model/trigger");
+			yield return null;
+		} while (transform == null);
+
+		transform.gameObject.GetComponent<MeshRenderer>().material = triggerMaterial;
 	}
 
 	private void ChangeOrbType(OrbGun orbGun, ViveController viveController, Vector2 position)
@@ -179,5 +199,95 @@ public class VRPlayerController : MonoBehaviour
 	{
 		StopCoroutine(VibrateControllers(viveController, durationInSeconds));
 		StartCoroutine(VibrateControllers(viveController, durationInSeconds));
+	}
+
+	private IEnumerator BlinkingTrigger()
+	{
+		Color yellow = new Color(1.0f, 1.0f, 0.5f, 1.0f);
+		Color diffrenceColor = new Color(0.1f, 0.1f, 0.05f, 0.0f);
+		bool fromBlackToYellow = true;
+
+		while (true)
+		{
+			Color newColor = triggerMaterial.color;
+
+			if (fromBlackToYellow)
+			{
+				newColor += diffrenceColor;
+			
+				if (newColor == yellow)
+					fromBlackToYellow = false;
+			}
+			else
+			{
+				newColor -= diffrenceColor;
+
+				if (newColor == Color.black)
+					fromBlackToYellow = true;
+			}
+
+			triggerMaterial.color = newColor;
+
+			yield return new WaitForSeconds(Time.deltaTime * 3.5f);
+		}
+	}
+
+	private IEnumerator BlinkingTrackpad()
+	{
+		Color yellow = new Color(1.0f, 1.0f, 0.5f, 1.0f);
+		Color diffrenceColor = new Color(0.0f, 0.0f, 0.05f, 0.0f);
+		bool fromWhiteToYellow = true;
+
+		MeshRenderer leftMeshRenderer = leftOrbGun.GetViveTrackpadMeshRenderer();
+		MeshRenderer rightMeshRenderer = rightOrbGun.GetViveTrackpadMeshRenderer();
+
+		while (true)
+		{
+			Color newColor = leftMeshRenderer.material.color;
+
+			if (fromWhiteToYellow)
+			{
+				newColor -= diffrenceColor;
+
+				if (newColor == yellow)
+					fromWhiteToYellow = false;
+			}
+			else
+			{
+				newColor += diffrenceColor;
+
+				if (newColor == Color.white)
+					fromWhiteToYellow = true;
+			}
+
+			leftMeshRenderer.material.color = newColor;
+			rightMeshRenderer.material.color = newColor;
+
+			yield return new WaitForSeconds(Time.deltaTime * 3.5f);
+		}
+	}
+
+	public void StartBlinkingTrigger()
+	{
+		StartCoroutine(BlinkingTrigger());
+	}
+
+	public void StopBlinkTrigger()
+	{
+		StopCoroutine(BlinkingTrigger());
+		triggerMaterial.color = Color.black;
+	}
+
+	public void StartBlinkingTrackpad()
+	{
+		StartCoroutine(BlinkingTrackpad());
+	}
+
+	public void StopBlinkTrackpad()
+	{
+		StopCoroutine(BlinkingTrackpad());
+
+		leftOrbGun.GetViveTrackpadMeshRenderer().material.color = Color.white;
+		rightOrbGun.GetViveTrackpadMeshRenderer().material.color = Color.white;
 	}
 }
