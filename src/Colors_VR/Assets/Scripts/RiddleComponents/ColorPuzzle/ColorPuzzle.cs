@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class ColorPuzzle : MonoBehaviour {
 
-    private Renderer[] ownRend;
+    private Renderer[] ownRenderer;
     public List<GameObject> neighbours;
+    private Dictionary<ColorPuzzle, Renderer[]> neighboursRenderer;
+    [HideInInspector]
+    public Color currentColor;
+    private ColorPuzzleBase colorPuzzleBase;
+    private bool isFading;
 
     [HideInInspector]
     public bool finished = false;
-	[HideInInspector]
-	public int fails = 0;
 
     private AudioClip splashSound;
     private AudioClip errorSound;
@@ -18,80 +21,83 @@ public class ColorPuzzle : MonoBehaviour {
 	void Start () {
         if(GetComponent<Renderer>() == null)
         {
-            ownRend = GetComponentsInChildren<Renderer>();            //use renderer of children in complex field
-        }
-        else
-        {
-            ownRend = new Renderer[] { GetComponent<Renderer>() };
+            ownRenderer = GetComponentsInChildren<Renderer>();            //use renderer of children in complex field
         }
 
-        splashSound = transform.parent.GetComponent<ColorPuzzleBase>().splashSound;
-        errorSound = transform.parent.GetComponent<ColorPuzzleBase>().errorSound;
+        neighboursRenderer = new Dictionary<ColorPuzzle, Renderer[]>();
+        foreach (GameObject go in neighbours)
+        {
+            neighboursRenderer.Add(go.GetComponent<ColorPuzzle>(), go.GetComponentsInChildren<Renderer>());
+        }
+
+        colorPuzzleBase = transform.parent.GetComponent<ColorPuzzleBase>();
+        splashSound = colorPuzzleBase.splashSound;
+        errorSound = colorPuzzleBase.errorSound;
     }
 
     public void changeColor(Color color)
     {
         bool changeColor = true;
-        Renderer[] neighbourRend;
 
-        foreach (GameObject go in neighbours)
+        foreach (Renderer renderer in ownRenderer)
         {
-            if (go.GetComponent<Renderer>() == null)
-            {
-                neighbourRend = go.GetComponentsInChildren<Renderer>();
-            }
-            else
-            {
-                neighbourRend = new Renderer[] { go.GetComponent<Renderer>() };
-            }
+            renderer.material.color = color;            //change color to orb
+        }
 
-            foreach (Renderer neighbourRender in neighbourRend)
+        foreach (KeyValuePair<ColorPuzzle, Renderer[]> neighbour in neighboursRenderer)
+        {
+            if (neighbour.Key.currentColor == color)               //if neighbours have same color as hitting orb
             {
-                if (neighbourRender.material.color == color)
-                {
-                    finished = false;
-                    go.GetComponent<ColorPuzzle>().finished = false;
-                    foreach (Renderer render in ownRend)
-                    {
-                        render.material.color = color;
-                    }
-
-                    StartCoroutine(fade(neighbourRender.material, neighbourRender.material.color, Color.white, 1));
-                    foreach (Renderer render in ownRend)
-                    {
-                        StartCoroutine(fade(render.material, render.material.color, Color.white, 1));
-                    }
-                    AudioSource.PlayClipAtPoint(errorSound, transform.position, 50);
-					++fails;
-					changeColor = false;
-                }
+                neighbour.Key.resetOwnColor(1);                     //reset color of neighbours back to white
+                changeColor = false;
             }
         }
 
         if (changeColor)
         {
             finished = true;
-            foreach(Renderer render in ownRend)
-            {
-                render.material.color = color;
-            }
+            colorPuzzleBase.checkSolution();
+        }
+        else
+        {
+            colorPuzzleBase.overallFails++;
+            resetOwnColor(1);                       //reset own color back to white
+            AudioSource.PlayClipAtPoint(errorSound, transform.position, 50);
+            colorPuzzleBase.checkForHints();
         }
 
-        transform.parent.GetComponent<ColorPuzzleBase>().checkSolution();
     }
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (!transform.parent.GetComponent<ColorPuzzleBase>().getIfSolutionIsCorrect())
+        Color color = collision.gameObject.GetComponent<Renderer>().material.color;
+        AudioSource.PlayClipAtPoint(splashSound, transform.position);
+        if (isFading || color == currentColor)
         {
-            changeColor(collision.gameObject.GetComponent<Renderer>().material.color);
-            AudioSource.PlayClipAtPoint(splashSound, transform.position);
             Destroy(collision.gameObject);
+            return;
+        }
+        if (!colorPuzzleBase.getIfSolutionIsCorrect() && !isFading)
+        {
+            currentColor = color;
+            changeColor(currentColor);
+            Destroy(collision.gameObject);
+        }
+    }
+
+    public void resetOwnColor(float timer)
+    {
+        currentColor = Color.white;
+        finished = false;
+        foreach(Renderer renderer in ownRenderer)
+        {
+            StartCoroutine(fade(renderer.material, renderer.material.color, Color.white, timer));
         }
     }
 
     private IEnumerator fade(Material material, Color colorFrom, Color colorTo, float timer)
     {
+        isFading = true;
         float t = 0.0f;
         while (t < 1.0)
         {
@@ -99,5 +105,6 @@ public class ColorPuzzle : MonoBehaviour {
             material.color = Color.Lerp(colorFrom, colorTo, t);
             yield return null;
         }
+        isFading = false;
     }
 }

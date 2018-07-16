@@ -4,9 +4,11 @@ using UnityEngine;
 public class ColorPuzzleBase : MonoBehaviour {
 
     private bool correct = false;
-	private int overallFails = 0;
+	public int overallFails = 0;
 	private bool[] hintsPlayed;
     public Door door;
+
+    private ColorPuzzle[] children;
 
     public AudioClip splashSound;
     public AudioClip errorSound;
@@ -24,58 +26,54 @@ public class ColorPuzzleBase : MonoBehaviour {
 
 		for (int i = 0; i < hintsPlayed.Length; ++i)
 			hintsPlayed[i] = false;
+
+        children = GetComponentsInChildren<ColorPuzzle>();
 	}
 
 	public void checkSolution()
     {
-		correct = true;
-
-		overallFails = 0;
-
-		foreach (Transform child in transform)
+        correct = true;
+		foreach (ColorPuzzle child in children)
         {
-			ColorPuzzle colorPuzzle = child.GetComponent<ColorPuzzle>();
-
-			overallFails += colorPuzzle.fails;
-
-			if (!colorPuzzle.finished)
+			if (!child.finished)
             {
                 correct = false;
+                break;
             }
         }
 
         if (correct)
         {
             Debug.Log("ColorPuzzle solution is correct");
-			if (door != null)
-			{
-				door.OpenDoor();
-			}
+            if (door != null)
+            {
+                door.OpenDoor();
+            }
 
-			if (OnCorrectSolution != null)
-			{
-				OnCorrectSolution();
-			}
-		}
-		else
-		{
-			Debug.Log(overallFails);
-			if (overallFails >= 3 && !hintsPlayed[0] && hints.Length > 0)
-			{
-				companion.StartSpeaking(hints[0]);
-				hintsPlayed[0] = true;
-			}
-			else if (overallFails >= 6 && !hintsPlayed[1] && hints.Length > 1)
-			{
-				companion.StartSpeaking(hints[1]);
-				hintsPlayed[1] = true;
-			}
-			else if (overallFails >= 9 && !hintsPlayed[2] && hints.Length > 2)
-			{
-				companion.StartSpeaking(hints[2]);
-				hintsPlayed[2] = true;
-			}
-		}
+            if (OnCorrectSolution != null)
+            {
+                OnCorrectSolution();
+            }
+        }
+    }
+
+    public void checkForHints()
+    {
+        if (overallFails >= 3 && hints.Length > 0 && !hintsPlayed[0] )
+        {
+            companion.StartSpeaking(hints[0]);
+            hintsPlayed[0] = true;
+        }
+        else if (overallFails >= 7 && hints.Length > 1 && !hintsPlayed[1])
+        {
+            companion.StartSpeaking(hints[1]);
+            hintsPlayed[1] = true;
+        }
+        else if (overallFails >= 11 && hints.Length > 2 && !hintsPlayed[2] )
+        {
+            companion.StartSpeaking(hints[2]);
+            hintsPlayed[2] = true;
+        }
     }
 
     public bool getIfSolutionIsCorrect()

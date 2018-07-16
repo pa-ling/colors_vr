@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class ColorPuzzleComplexChildCollision : MonoBehaviour {
 
+    private ColorPuzzle parent;
+
+    void Start()
+    {
+        parent = transform.parent.GetComponent<ColorPuzzle>();
+    }
+
     void OnCollisionEnter(Collision collision)
     {
-        transform.parent.GetComponent<ColorPuzzle>().OnCollisionEnter(collision);
+        parent.OnCollisionEnter(collision);
     }
 }
