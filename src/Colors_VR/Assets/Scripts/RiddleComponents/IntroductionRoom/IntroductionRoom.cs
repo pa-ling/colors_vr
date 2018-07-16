@@ -26,14 +26,16 @@ public class IntroductionRoom : MonoBehaviour
 		player = GameObject.Find("[DebugPlayer]");
 
 		if (player == null)
-			player = GameObject.Find("[CameraRig]");
-
-		OrbGun[] orbGuns = player.GetComponentsInChildren<OrbGun>(true);
-
-		for (int i = 0; i < orbGuns.Length; ++i)
 		{
-			orbGuns[i].OnOrbShot += OrbGunShot;
-			orbGuns[i].OnChangeOrb += OrbChange;
+			player = GameObject.Find("[CameraRig]");
+			StartCoroutine(SetupOrbGuns(player));
+		}
+		else
+		{
+			OrbGun orbGun = player.GetComponentInChildren<OrbGun>(true);
+
+			orbGun.OnOrbShot += OrbGunShot;
+			orbGun.OnChangeOrb += OrbChange;
 		}
 
 		paintOrbWasShot = false;
@@ -57,6 +59,25 @@ public class IntroductionRoom : MonoBehaviour
 	private void OrbChange(OrbType orbType)
 	{
 		orbChanged = true;
+	}
+
+	private IEnumerator SetupOrbGuns(GameObject player)
+	{
+		OrbGun[] orbGuns = new OrbGun[0];
+
+		do
+		{
+			orbGuns = player.GetComponentsInChildren<OrbGun>(true);
+			yield return new WaitForSeconds(0.1f);
+		} while (orbGuns.Length != 2);
+
+		for (int i = 0; i < orbGuns.Length; ++i)
+		{
+			orbGuns[i].OnOrbShot += OrbGunShot;
+			orbGuns[i].OnChangeOrb += OrbChange;
+		}
+
+		yield return new WaitForSeconds(5.0f);
 	}
 
 	private IEnumerator Introduction()

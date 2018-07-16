@@ -17,7 +17,7 @@ public class OrbGun : MonoBehaviour
 	public GameObject teleportOrb = null;
 	public bool teleportOrbIsActive = false;
 	[Header("Transform for Teleport")]
-	public Transform playerRoor;
+	public Transform playerRoot;
 	[Header("Companion")]
 	public Companion companion;
 
@@ -67,7 +67,7 @@ public class OrbGun : MonoBehaviour
 		paintOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;
 		physicsOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;
 		teleportOrbComponent.dontLeaveSplatsOn = dontLeaveSplatsOn;
-		teleportOrbComponent.playerTransform = playerRoor;
+		teleportOrbComponent.playerTransform = playerRoot;
 	}
 
 	public OrbType GetCurrentOrb()
@@ -138,6 +138,18 @@ public class OrbGun : MonoBehaviour
 			OnOrbShot(currentOrb);
 	}
 
+	public void SetPlayerRootTransform(Transform transform)
+	{
+		playerRoot = transform;
+		teleportOrbComponent.playerTransform = transform;
+	}
+
+	public void SetCompanion(Companion newCompanion)
+	{
+		companion = newCompanion;
+		commandOrbComponent.companion = newCompanion;
+	}
+
 	public void SetOrbActive(OrbType orbType, Material material)
 	{
 		if (orbType == OrbType.CommandOrb)
@@ -175,5 +187,21 @@ public class OrbGun : MonoBehaviour
 	public MeshRenderer GetViveTrackpadMeshRenderer()
 	{
 		return viveTrackpadMeshRenderer;
+	}
+
+	public int GetNumberOfActiveOrbs()
+	{
+		int numberOfActiveOrbs = 0;
+
+		if (commandOrbIsActive)
+			++numberOfActiveOrbs;
+		else if (paintOrbIsActive)
+			++numberOfActiveOrbs;
+		else if (physicsOrbIsActive)
+			++numberOfActiveOrbs;
+		else if (teleportOrbIsActive)
+			++numberOfActiveOrbs;
+
+		return numberOfActiveOrbs;
 	}
 }

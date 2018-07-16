@@ -6,12 +6,14 @@ public class VRPlayerController : MonoBehaviour
 	[Header("Companion")]
 	public Companion companion;
 
-	[Header("OrbGuns")]
-	public OrbGun leftOrbGun;
-	public OrbGun rightOrbGun;
+	[Header("OrbGunPrefab")]
+	public GameObject orbGunPrefab;
 
 	[Header("Material")]
 	public Material triggerMaterial;
+
+	private OrbGun leftOrbGun;
+	private OrbGun rightOrbGun;
 
 	private SteamVR_Controller.Device leftController;
 	private SteamVR_Controller.Device rightController;
@@ -66,6 +68,17 @@ public class VRPlayerController : MonoBehaviour
 		SteamVR_ControllerManager steamVR_ControllerManager = GetComponent<SteamVR_ControllerManager>();
 		Transform transform = null;
 
+		Instantiate(orbGunPrefab, steamVR_ControllerManager.left.transform);
+
+		do
+		{
+			leftOrbGun = steamVR_ControllerManager.left.GetComponentInChildren<OrbGun>();
+			yield return null;
+		} while (leftOrbGun == null);
+
+		leftOrbGun.SetPlayerRootTransform(gameObject.transform);
+		leftOrbGun.SetCompanion(companion);
+
 		do
 		{
 			transform = steamVR_ControllerManager.left.transform.Find("Model/trackpad");
@@ -73,14 +86,6 @@ public class VRPlayerController : MonoBehaviour
 		} while (transform == null);
 
 		leftOrbGun.SetViveTrackpadMeshRenderer(transform.gameObject.GetComponent<MeshRenderer>());
-
-		do
-		{
-			transform = steamVR_ControllerManager.left.transform.Find("Model/trigger");
-			yield return null;
-		} while (transform == null);
-
-		transform.gameObject.GetComponent<MeshRenderer>().material = triggerMaterial;
 	}
 
 	private IEnumerator SetupRightController()
@@ -94,6 +99,17 @@ public class VRPlayerController : MonoBehaviour
 		SteamVR_ControllerManager steamVR_ControllerManager = GetComponent<SteamVR_ControllerManager>();
 		Transform transform = null;
 
+		Instantiate(orbGunPrefab, steamVR_ControllerManager.right.transform);
+
+		do
+		{
+			rightOrbGun = steamVR_ControllerManager.right.GetComponentInChildren<OrbGun>();
+			yield return null;
+		} while (rightOrbGun == null);
+
+		rightOrbGun.SetPlayerRootTransform(gameObject.transform);
+		rightOrbGun.SetCompanion(companion);
+
 		do
 		{
 			transform = steamVR_ControllerManager.right.transform.Find("Model/trackpad");
@@ -101,14 +117,6 @@ public class VRPlayerController : MonoBehaviour
 		} while (transform == null);
 
 		rightOrbGun.SetViveTrackpadMeshRenderer(transform.gameObject.GetComponent<MeshRenderer>());
-
-		do
-		{
-			transform = steamVR_ControllerManager.right.transform.Find("Model/trigger");
-			yield return null;
-		} while (transform == null);
-
-		transform.gameObject.GetComponent<MeshRenderer>().material = triggerMaterial;
 	}
 
 	private void ChangeOrbType(OrbGun orbGun, ViveController viveController, Vector2 position)

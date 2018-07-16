@@ -46,6 +46,8 @@ public class TeleportPuzzle1 : MonoBehaviour
 	{
 		float delay = 1.0f;
 
+		companion.SetIdle(false);
+
 		yield return new WaitForSeconds(1.0f);
 
 		while (companion.IsMoving())
@@ -63,6 +65,8 @@ public class TeleportPuzzle1 : MonoBehaviour
 
 		companion.StartSpeaking(audioClips[1]);
 		companion.SetAutoFollow(true);
+
+		companion.SetIdle(true);
 
 		yield return null;
 	}
