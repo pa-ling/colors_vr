@@ -30,6 +30,8 @@ public class ColorPuzzleBase : MonoBehaviour {
     {
 		correct = true;
 
+		overallFails = 0;
+
 		foreach (Transform child in transform)
         {
 			ColorPuzzle colorPuzzle = child.GetComponent<ColorPuzzle>();
