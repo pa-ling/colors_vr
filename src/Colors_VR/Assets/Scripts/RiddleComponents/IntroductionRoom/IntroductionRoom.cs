@@ -100,17 +100,10 @@ public class IntroductionRoom : MonoBehaviour
 		companion.StartSpeaking(audioClips[4]);
 		yield return new WaitForSeconds(audioClips[4].length + delay);
 
-		VRPlayerController vrPlayerController = player.GetComponent<VRPlayerController>();
-		if (vrPlayerController != null)
-			vrPlayerController.StartBlinkingTrigger();
-
 		do
 		{
 			yield return new WaitForSeconds(1.0f);
 		} while (!paintOrbWasShot);
-
-		if (vrPlayerController != null)
-			vrPlayerController.StopBlinkTrigger();
 
 		companion.StartSpeaking(audioClips[5]);
 		yield return new WaitForSeconds(audioClips[5].length + delay);
@@ -143,16 +136,10 @@ public class IntroductionRoom : MonoBehaviour
 
 		orbChanged = false;
 
-		//if (vrPlayerController != null)
-		//	vrPlayerController.StartBlinkingTrackpad();
-
 		do
 		{
 			yield return new WaitForSeconds(1.0f);
 		} while (!orbChanged);
-
-		//if (vrPlayerController != null)
-		//	vrPlayerController.StopBlinkTrackpad();
 
 		companion.StartSpeaking(audioClips[8]);
 		yield return new WaitForSeconds(audioClips[8].length + delay);
@@ -162,6 +149,9 @@ public class IntroductionRoom : MonoBehaviour
 		yield return new WaitForSeconds(1.0f);
 
 		companion.StartSpeaking(audioClips[9]);
+		yield return new WaitForSeconds(audioClips[9].length);
+
+		companion.SetIdle(true);
 		yield return null;
 	}
 

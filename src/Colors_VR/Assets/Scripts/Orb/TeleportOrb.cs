@@ -39,7 +39,24 @@ public class TeleportOrb : Orb
 
 		AudioSource.PlayClipAtPoint(splashSound, transform.position, 35.0f);
 
-		StartCoroutine(Teleport(new Vector3(collision.contacts[0].point.x, collision.contacts[0].point.y, collision.contacts[0].point.z), 0.2f));
+		Vector3 targetPosition = collision.contacts[0].point;
+		//Debug.Log("Old targetPosition: " + targetPosition);
+		//RaycastHit raycastHit;
+		//Debug.DrawRay(targetPosition, Vector3.up, Color.red);
+		////if (Physics.BoxCast(targetPosition, Vector3.one/*new Vector3(0.5f, 0.1f, 0.5f)*/, Vector3.zero, out raycastHit))
+		//if (Physics.BoxCast(targetPosition + Vector3.up, new Vector3(10.0f, 0.01f, 10.0f), Vector3.up, out raycastHit, Quaternion.identity, 0.1f))
+		//{
+		//	Debug.Log("Something in the way. " + raycastHit.point + ", " + raycastHit.normal);
+		//	Debug.DrawRay(raycastHit.point, raycastHit.normal, Color.red);
+
+		//	targetPosition += raycastHit.normal * 0.25f;
+
+		//	Debug.Log("New targetPosition: " + targetPosition);
+		//}
+		//else
+		//	Debug.Log("Nothing in the way.");
+
+		StartCoroutine(Teleport(targetPosition, 0.2f));
 
         Collider collider = GetComponent<Collider>();
         collider.enabled = false;

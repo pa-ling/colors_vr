@@ -5,7 +5,7 @@ public class TeleportPuzzle2 : MonoBehaviour
 {
 	public Companion companion;
 	public Door door;
-	public PressButton pressButton;
+	public ColorPuzzleBase colorPuzzle;
 
 	private Animator animator;
 	private NavMeshSurface navMeshSurface;
@@ -15,7 +15,7 @@ public class TeleportPuzzle2 : MonoBehaviour
 		animator = GetComponent<Animator>();
 		navMeshSurface = GetComponentInParent<NavMeshSurface>();
 
-		pressButton.OnPressButtonHit += BuildUp;
+		colorPuzzle.OnCorrectSolution += BuildUp;
 	}
 
 	private void OnTriggerEnter(Collider other)

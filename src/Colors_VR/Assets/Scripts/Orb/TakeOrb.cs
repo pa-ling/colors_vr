@@ -28,6 +28,8 @@ public class TakeOrb : MonoBehaviour {
 			foreach (OrbGun orbGun in orbGuns)
 				orbGun.SetOrbActive(orbType, viveTrackpadMaterial);
 
+			other.gameObject.GetComponentInChildren<OrbGun>().SetCurrentOrbTo(orbType);
+
 			VRPlayerController vrPlayerController = other.transform.root.GetComponent<VRPlayerController>();
 
 			if (vrPlayerController != null)

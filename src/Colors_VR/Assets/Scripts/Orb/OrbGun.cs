@@ -7,6 +7,7 @@ public class OrbGun : MonoBehaviour
 	public LayerMask dontCollidWith;
 	public LayerMask dontLeaveSplatsOn;
 	[Header("Orb Prefabs")]
+	public OrbType currentOrb = OrbType.None;
 	public GameObject commandOrb = null;
 	public bool commandOrbIsActive = false;
 	public GameObject paintOrb = null;
@@ -26,7 +27,6 @@ public class OrbGun : MonoBehaviour
 	private MeshRenderer meshRenderer;
 	private AudioSource audioSource;
 
-	private OrbType currentOrb = OrbType.None;
 	private CommandOrb commandOrbComponent;
 	private PaintOrb paintOrbComponent;
 	private PhysicsOrb physicsOrbComponent;
@@ -151,8 +151,6 @@ public class OrbGun : MonoBehaviour
 
 		if (viveTrackpadMeshRenderer != null && material != null)
 			viveTrackpadMeshRenderer.material = material;
-
-		SetCurrentOrbTo(orbType);
 	}
 
 	public bool IsOrbActive(OrbType orbType)

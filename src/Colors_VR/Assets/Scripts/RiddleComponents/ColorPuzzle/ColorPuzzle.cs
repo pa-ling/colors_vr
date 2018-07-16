@@ -9,6 +9,8 @@ public class ColorPuzzle : MonoBehaviour {
 
     [HideInInspector]
     public bool finished = false;
+	[HideInInspector]
+	public int fails = 0;
 
     private AudioClip splashSound;
     private AudioClip errorSound;
@@ -60,7 +62,8 @@ public class ColorPuzzle : MonoBehaviour {
                         StartCoroutine(fade(render.material, render.material.color, Color.white, 1));
                     }
                     AudioSource.PlayClipAtPoint(errorSound, transform.position, 50);
-                    changeColor = false;
+					++fails;
+					changeColor = false;
                 }
             }
         }
