@@ -9,8 +9,13 @@ public class VRPlayerController : MonoBehaviour
 	[Header("OrbGunPrefab")]
 	public GameObject orbGunPrefab;
 
-	[Header("Material")]
-	public Material triggerMaterial;
+	[Header("HintsForLeftController")]
+	public GameObject triggerHintLeft;
+	public GameObject touchpadHintLeft;
+
+	[Header("HintsForRightController")]
+	public GameObject triggerHintRight;
+	public GameObject touchpadHintRight;
 
 	private OrbGun leftOrbGun;
 	private OrbGun rightOrbGun;
@@ -207,5 +212,17 @@ public class VRPlayerController : MonoBehaviour
 	{
 		StopCoroutine(VibrateControllers(viveController, durationInSeconds));
 		StartCoroutine(VibrateControllers(viveController, durationInSeconds));
+	}
+
+	public void SetTriggerHintActive(bool value)
+	{
+		triggerHintLeft.SetActive(value);
+		triggerHintRight.SetActive(value);
+	}
+
+	public void SetTouchpadHintActive(bool value)
+	{
+		touchpadHintLeft.SetActive(value);
+		touchpadHintRight.SetActive(value);
 	}
 }

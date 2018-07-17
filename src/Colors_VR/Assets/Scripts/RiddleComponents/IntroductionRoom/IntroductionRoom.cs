@@ -84,32 +84,32 @@ public class IntroductionRoom : MonoBehaviour
 	{
 		float delay = 1.0f;
 
-		yield return new WaitForSeconds(5.0f);
+		//yield return new WaitForSeconds(5.0f);
 
-		companion.StartSpeaking(audioClips[0]);
-		yield return new WaitForSeconds(audioClips[0].length + delay);
+		//companion.StartSpeaking(audioClips[0]);
+		//yield return new WaitForSeconds(audioClips[0].length + delay);
 
-		InvokeRepeating("CompanionSayImHere", 5.0f, 5.0f);
+		//InvokeRepeating("CompanionSayImHere", 5.0f, 5.0f);
 
-		while (!companion.IsVisibleByAnyCamera())
-			yield return null;
+		//while (!companion.IsVisibleByAnyCamera())
+		//	yield return null;
 
-		CancelInvoke("CompanionSayImHere");
+		//CancelInvoke("CompanionSayImHere");
 
-		yield return new WaitForSeconds(1.0f);
+		//yield return new WaitForSeconds(1.0f);
 
-		companion.StartSpeaking(audioClips[2]);
-		yield return new WaitForSeconds(audioClips[2].length + delay);
+		//companion.StartSpeaking(audioClips[2]);
+		//yield return new WaitForSeconds(audioClips[2].length + delay);
 
-		Vector3 lastCameraPosition = Camera.main.transform.position;
+		//Vector3 lastCameraPosition = Camera.main.transform.position;
 
-		do
-		{
-			yield return new WaitForSeconds(1.0f);
-		} while (lastCameraPosition == Camera.main.transform.position);
+		//do
+		//{
+		//	yield return new WaitForSeconds(1.0f);
+		//} while (lastCameraPosition == Camera.main.transform.position);
 
-		companion.StartSpeaking(audioClips[3]);
-		yield return new WaitForSeconds(audioClips[3].length + delay);
+		//companion.StartSpeaking(audioClips[3]);
+		//yield return new WaitForSeconds(audioClips[3].length + delay);
 
 		Vector3 orbPosition = companion.transform.position + companion.transform.forward;
 		orbPosition.y = 1.5f;
@@ -121,10 +121,17 @@ public class IntroductionRoom : MonoBehaviour
 		companion.StartSpeaking(audioClips[4]);
 		yield return new WaitForSeconds(audioClips[4].length + delay);
 
+		VRPlayerController vrPlayerController = player.GetComponent<VRPlayerController>();
+		if (vrPlayerController != null)
+			vrPlayerController.SetTriggerHintActive(true);
+
 		do
 		{
 			yield return new WaitForSeconds(1.0f);
 		} while (!paintOrbWasShot);
+
+		if (vrPlayerController != null)
+			vrPlayerController.SetTriggerHintActive(false);
 
 		companion.StartSpeaking(audioClips[5]);
 		yield return new WaitForSeconds(audioClips[5].length + delay);
@@ -157,10 +164,16 @@ public class IntroductionRoom : MonoBehaviour
 
 		orbChanged = false;
 
+		if (vrPlayerController != null)
+			vrPlayerController.SetTouchpadHintActive(true);
+
 		do
 		{
 			yield return new WaitForSeconds(1.0f);
 		} while (!orbChanged);
+
+		if (vrPlayerController != null)
+			vrPlayerController.SetTouchpadHintActive(false);
 
 		companion.StartSpeaking(audioClips[8]);
 		yield return new WaitForSeconds(audioClips[8].length + delay);

@@ -163,6 +163,8 @@ public class OrbGun : MonoBehaviour
 
 		if (viveTrackpadMeshRenderer != null && material != null)
 			viveTrackpadMeshRenderer.material = material;
+
+		SetCurrentOrbTo(orbType);
 	}
 
 	public bool IsOrbActive(OrbType orbType)

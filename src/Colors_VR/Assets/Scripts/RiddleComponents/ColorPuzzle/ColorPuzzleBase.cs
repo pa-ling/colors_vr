@@ -3,22 +3,27 @@ using UnityEngine;
 
 public class ColorPuzzleBase : MonoBehaviour {
 
-    private bool correct = false;
-	public int overallFails = 0;
-	private bool[] hintsPlayed;
-    public Door door;
-
-    private ColorPuzzle[] children;
-
-    public AudioClip splashSound;
-    public AudioClip errorSound;
-
+    
+	[Header("Door")]
+	public Door door;
+	[Header("Companion")]
 	public Companion companion;
+	[Header("Sounds")]
+	public AudioClip splashSound;
+	public AudioClip errorSound;
 
 	public AudioClip[] hints;
 
 	[HideInInspector]
+	public int overallFails = 0;
+	[HideInInspector]
 	public event Action OnCorrectSolution;
+
+	private ColorPuzzle[] children;
+
+	private bool correct = false;
+
+	private bool[] hintsPlayed;
 
 	private void Start()
 	{
