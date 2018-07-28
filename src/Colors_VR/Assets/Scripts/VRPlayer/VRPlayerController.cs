@@ -124,7 +124,8 @@ public class VRPlayerController : MonoBehaviour
 		rightOrbGun.SetViveTrackpadMeshRenderer(transform.gameObject.GetComponent<MeshRenderer>());
 	}
 
-	private void ChangeOrbType(OrbGun orbGun, ViveController viveController, Vector2 position)
+    //change orb type depending on which orbs can be used and showing the colors on the trackpad
+    private void ChangeOrbType(OrbGun orbGun, ViveController viveController, Vector2 position)
 	{
 		Vector2 bottomToTop = Vector2.up;
 		Vector2 leftBottomToRightTop = new Vector2(2.0f, 2.0f);

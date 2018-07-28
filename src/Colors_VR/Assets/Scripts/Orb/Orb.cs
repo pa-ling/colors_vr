@@ -35,6 +35,8 @@ public class Orb : MonoBehaviour
 
 	protected void Splat(Collision collision)
 	{
+        //old splash-mechanic with particles
+
         //SplatParticle splatParticle = new SplatParticle();
         //splatParticle.position = collision.contacts[0].point;
         //splatParticle.position += collision.contacts[0].normal * 0.001f;
@@ -42,11 +44,10 @@ public class Orb : MonoBehaviour
         //splatParticle.rotation.z = UnityEngine.Random.Range(0.0f, 360.0f);
         //splatParticle.size = UnityEngine.Random.Range(splatMinSize, splatMaxSize);
         //splatParticle.color = meshRenderer.material.color;
-
         //splatParticleSystem.AddSplatParticle(splatParticle);
 
 
-
+        //new splash-mechanic with decals ("SimpleDecalSystem" from DENI35 is used (Unity Asset Store))
         //splat needs an empty gameobject as parent for scaling
         GameObject parentSplat = decalPool.SpawnDecal();
         parentSplat.transform.position = collision.contacts[0].point;
@@ -72,8 +73,6 @@ public class Orb : MonoBehaviour
             Vector3 euler = splat.transform.eulerAngles;
             euler.z = UnityEngine.Random.Range(0f, 360f);
             splat.transform.eulerAngles = euler;
-
-
 
             _Decal.DecalBuilder.BuildAndSetDirty(decal);
         }

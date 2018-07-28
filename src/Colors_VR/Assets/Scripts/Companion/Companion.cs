@@ -40,6 +40,7 @@ public class Companion : MonoBehaviour
 	{
 		transform.LookAt(Camera.main.transform);
 
+        //companion has 4 default positions around the player 
 		if (autoFollowTransforms != null)
 		{
 			if (autoFollowTransforms[lastAutoFollowIndex].position != lastAutoFollowPosition && autoFollow)
@@ -71,6 +72,7 @@ public class Companion : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
+        //if hit by an orb the companion will speak
 		if (collision.gameObject.layer == LayerMask.NameToLayer("Orb"))
 		{
 			if (autoFollow)

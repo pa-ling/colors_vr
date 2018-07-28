@@ -17,7 +17,7 @@ public class Door : MonoBehaviour
     {
         if (openDoorThroughTriggerZone && !animator.GetBool("Open"))
         {
-            if (other.gameObject.layer == 9)
+            if (other.gameObject.layer == 9)                                    //layer 9 = player
 				OpenDoor();
         }
     }

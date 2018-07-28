@@ -62,6 +62,7 @@ public class ColorPuzzleBase : MonoBehaviour {
         }
     }
 
+    //play hints when player gets number of fails
     public void checkForHints()
     {
         if (overallFails >= 3 && hints.Length > 0 && !hintsPlayed[0] )

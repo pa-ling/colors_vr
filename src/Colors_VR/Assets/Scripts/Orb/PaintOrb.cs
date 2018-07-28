@@ -4,8 +4,8 @@ public class PaintOrb : Orb
 {
 	private void OnCollisionEnter(Collision collision)
 	{
-		if ((dontLeaveSplatsOn & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)
-			return;
+		if ((dontLeaveSplatsOn & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)               //if it collides with "dontLeaveSplatsOn"-layer it bounces off
+            return;
 
 		Splat(collision);
 

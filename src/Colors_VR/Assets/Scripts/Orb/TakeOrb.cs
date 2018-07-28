@@ -19,7 +19,8 @@ public class TakeOrb : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 9 && !taken)
+        //adds orb to orbguns
+        if (other.gameObject.layer == 9 && !taken)                                               //layer 9 = Player
         {
             taken = true;
 

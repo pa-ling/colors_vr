@@ -20,7 +20,7 @@ public class Key : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<PhysicsOrb>() == null)
+        if (collision.gameObject.GetComponent<PhysicsOrb>() == null)                                    //collision only with physics orb
             return;
 
 		Destroy(collision.gameObject);

@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+DecalPool-Controller
+Instantiates X number of splat-decals before starting.
+Uses only splats from the pool, if all splats are used uses the first used splats (FiFo). 
+*/
 public class DecalPoolController : MonoBehaviour {
 
     public int maxDecals;
@@ -45,8 +51,6 @@ public class DecalPoolController : MonoBehaviour {
         GameObject decal = GetNextAvailableDecal();
         if (decal != null)
         {
-            //set everything for decal (see Splat-Method)
-
             decal.SetActive(true);
             decalsInActiveInWorld.Enqueue(decal);
             return decal;
@@ -55,29 +59,4 @@ public class DecalPoolController : MonoBehaviour {
         return null;
     }
 
-
-//#if UNITY_EDITOR
-
-//    private void Update()
-//    {
-//        if (transform.childCount < maxConcurrentDecals)
-//            InstantiateDecal();
-//        else if (ShoudlRemoveDecal())
-//            DestroyExtraDecal();
-//    }
-
-//    private bool ShoudlRemoveDecal()
-//    {
-//        return transform.childCount > maxConcurrentDecals;
-//    }
-
-//    private void DestroyExtraDecal()
-//    {
-//        if (decalsInPool.Count > 0)
-//            Destroy(decalsInPool.Dequeue());
-//        else if (ShoudlRemoveDecal() && decalsActiveInWorld.Count > 0)
-//            Destroy(decalsActiveInWorld.Dequeue());
-//    }
-
-//#endif
 }

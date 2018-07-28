@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/*
+Class for precise collision detection. If orbs are too fast they won't trigger a collision (in 1. frame in front of collider, in 2. frame already behind collider). Checks with Raycast if a collision happened.
+*/
 public class CollisionDetector : MonoBehaviour
 {
 	public LayerMask collidingLayer = -1;
