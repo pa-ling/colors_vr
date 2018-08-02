@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/*
+Fades to black and lets Controller vibrate when player walks in gameobject
+*/
 public class FadeWhenLeaveArea : MonoBehaviour
 {
 	public float fadeToBlackTime = 1.0f;

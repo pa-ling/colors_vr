@@ -25,15 +25,15 @@ public class TeleportOrb : Orb
 			{
 				bitstring = ((bitstring << 32 - i) >> 32 - i);
 				if (collision.collider.gameObject.layer != i)
-					return;
+					return;                                                                                     //bounces off all layers except "Teleportable"
 			}
 		}
 
-		if (collision.contacts[0].normal != collision.gameObject.transform.up)
+		if (collision.contacts[0].normal != collision.gameObject.transform.up)                                  //if it doesn't collide with the top side of an object it bounces off
 			return;
 
-		if ((dontLeaveSplatsOn & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)
-			return;
+		if ((dontLeaveSplatsOn & 1 << collision.gameObject.layer) == 1 << collision.gameObject.layer)           //if it collides with "dontLeaveSplatsOn" - layer it bounces off
+            return;
 
 		Splat(collision);
 

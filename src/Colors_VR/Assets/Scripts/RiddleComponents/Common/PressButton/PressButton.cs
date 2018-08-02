@@ -19,8 +19,8 @@ public class PressButton : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (collision.gameObject.GetComponent<PhysicsOrb>() == null)
-			return;
+		if (collision.gameObject.GetComponent<PhysicsOrb>() == null)                                    //collision only with physics orb
+            return;
 
 		meshRenderer.material.color = collision.gameObject.GetComponent<MeshRenderer>().material.color;
 

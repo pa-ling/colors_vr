@@ -42,6 +42,7 @@ public class TeleportPuzzle1 : MonoBehaviour
 		}
 	}
 
+    //tutorial for physics orb, companion tells how to use it, waits for action (shooting red orb)
 	private IEnumerator Introduction()
 	{
 		float delay = 1.0f;
