@@ -84,32 +84,32 @@ public class IntroductionRoom : MonoBehaviour
 	{
 		float delay = 1.0f;
 
-		//yield return new WaitForSeconds(5.0f);
+		yield return new WaitForSeconds(5.0f);
 
-		//companion.StartSpeaking(audioClips[0]);
-		//yield return new WaitForSeconds(audioClips[0].length + delay);
+		companion.StartSpeaking(audioClips[0]);
+		yield return new WaitForSeconds(audioClips[0].length + delay);
 
-		//InvokeRepeating("CompanionSayImHere", 5.0f, 5.0f);
+		InvokeRepeating("CompanionSayImHere", 5.0f, 5.0f);
 
-		//while (!companion.IsVisibleByAnyCamera())
-		//	yield return null;
+		while (!companion.IsVisibleByAnyCamera())
+			yield return null;
 
-		//CancelInvoke("CompanionSayImHere");
+		CancelInvoke("CompanionSayImHere");
 
-		//yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(1.0f);
 
-		//companion.StartSpeaking(audioClips[2]);
-		//yield return new WaitForSeconds(audioClips[2].length + delay);
+		companion.StartSpeaking(audioClips[2]);
+		yield return new WaitForSeconds(audioClips[2].length + delay);
 
-		//Vector3 lastCameraPosition = Camera.main.transform.position;
+		Vector3 lastCameraPosition = Camera.main.transform.position;
 
-		//do
-		//{
-		//	yield return new WaitForSeconds(1.0f);
-		//} while (lastCameraPosition == Camera.main.transform.position);
+		do
+		{
+			yield return new WaitForSeconds(1.0f);
+		} while (lastCameraPosition == Camera.main.transform.position);
 
-		//companion.StartSpeaking(audioClips[3]);
-		//yield return new WaitForSeconds(audioClips[3].length + delay);
+		companion.StartSpeaking(audioClips[3]);
+		yield return new WaitForSeconds(audioClips[3].length + delay);
 
 		Vector3 orbPosition = companion.transform.position + companion.transform.forward;
 		orbPosition.y = 1.5f;
