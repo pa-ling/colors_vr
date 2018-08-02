@@ -21,4 +21,4 @@ Für die Nutzung ohne HTC Vive folgendes beachten:
   - Die Gameobjekte "[CameraRig]" und "[SteamVR]" deaktivieren
 - Starten
 
-Die Nutzung des "[DebugPlayer]" ist zum entwickeln und testen vorgesehen. Das eigendliche Spielerlebenis entsteht nur mit der HTC Vive.
+Die Nutzung des "[DebugPlayer]" ist zum entwickeln und testen vorgesehen. Daher ist das Spielerlebnis und Funktionsweise von Mechaniken teilweise anders. Das eigendliche Spielerlebenis entsteht nur mit der HTC Vive.
